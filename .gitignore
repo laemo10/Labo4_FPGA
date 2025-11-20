@@ -1,0 +1,13 @@
+ZYBO_HDMI_MGA_2018_2/project_1/.Xil/
+ZYBO_HDMI_MGA_2018_2/project_1/project_1.cache/
+ZYBO_HDMI_MGA_2018_2/project_1/project_1.hw/
+ZYBO_HDMI_MGA_2018_2/project_1/project_1.ip_user_files/
+ZYBO_HDMI_MGA_2018_2/project_1/project_1.runs/
+ZYBO_HDMI_MGA_2018_2/project_1/project_1.sim/
+
+ZYBO_HDMI_MGA_2018_2/project_1/*.log
+ZYBO_HDMI_MGA_2018_2/project_1/*.jou
+ZYBO_HDMI_MGA_2018_2/project_1/*.str
+ZYBO_HDMI_MGA_2018_2/project_1/*.backup
+
+ZYBO_HDMI_MGA_2018_2/repo/cache/
