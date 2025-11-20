@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Thu Nov 20 08:40:25 2025
+--Date        : Thu Nov 20 11:08:57 2025
 --Host        : pcetu-139 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd.bd
 --Design      : HDMI_bd
@@ -33,7 +33,7 @@ entity HDMI_bd is
     reset : in STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of HDMI_bd : entity is "HDMI_bd,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=HDMI_bd,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=4,numReposBlks=4,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of HDMI_bd : entity is "HDMI_bd,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=HDMI_bd,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=5,numReposBlks=5,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=1,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of HDMI_bd : entity is "HDMI_bd.hwdef";
 end HDMI_bd;
@@ -89,7 +89,14 @@ architecture STRUCTURE of HDMI_bd is
     dout : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component HDMI_bd_xlconstant_0_0;
+  component HDMI_bd_White_Detector_0_0 is
+  port (
+    hdmi_in : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    hdmi_out : out STD_LOGIC_VECTOR ( 23 downto 0 )
+  );
+  end component HDMI_bd_White_Detector_0_0;
   signal CLK_1 : STD_LOGIC;
+  signal White_Detector_0_hdmi_out : STD_LOGIC_VECTOR ( 23 downto 0 );
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
   signal dvi2rgb_0_DDC_SCL_I : STD_LOGIC;
   signal dvi2rgb_0_DDC_SCL_O : STD_LOGIC;
@@ -98,10 +105,10 @@ architecture STRUCTURE of HDMI_bd is
   signal dvi2rgb_0_DDC_SDA_O : STD_LOGIC;
   signal dvi2rgb_0_DDC_SDA_T : STD_LOGIC;
   signal dvi2rgb_0_PixelClk : STD_LOGIC;
-  signal dvi2rgb_0_RGB_ACTIVE_VIDEO : STD_LOGIC;
-  signal dvi2rgb_0_RGB_DATA : STD_LOGIC_VECTOR ( 23 downto 0 );
-  signal dvi2rgb_0_RGB_HSYNC : STD_LOGIC;
-  signal dvi2rgb_0_RGB_VSYNC : STD_LOGIC;
+  signal dvi2rgb_0_vid_pData : STD_LOGIC_VECTOR ( 23 downto 0 );
+  signal dvi2rgb_0_vid_pHSync : STD_LOGIC;
+  signal dvi2rgb_0_vid_pVDE : STD_LOGIC;
+  signal dvi2rgb_0_vid_pVSync : STD_LOGIC;
   signal hdmi_in_1_CLK_N : STD_LOGIC;
   signal hdmi_in_1_CLK_P : STD_LOGIC;
   signal hdmi_in_1_DATA_N : STD_LOGIC_VECTOR ( 2 downto 0 );
@@ -152,6 +159,11 @@ begin
   hdmi_out_data_n(2 downto 0) <= rgb2dvi_0_TMDS_DATA_N(2 downto 0);
   hdmi_out_data_p(2 downto 0) <= rgb2dvi_0_TMDS_DATA_P(2 downto 0);
   reset_1 <= reset;
+White_Detector_0: component HDMI_bd_White_Detector_0_0
+     port map (
+      hdmi_in(23 downto 0) => dvi2rgb_0_vid_pData(23 downto 0),
+      hdmi_out(23 downto 0) => White_Detector_0_hdmi_out(23 downto 0)
+    );
 clk_wiz_0: component HDMI_bd_clk_wiz_0_0
      port map (
       clk_in1 => CLK_1,
@@ -176,10 +188,10 @@ dvi2rgb_0: component HDMI_bd_dvi2rgb_0_0
       aPixelClkLckd => NLW_dvi2rgb_0_aPixelClkLckd_UNCONNECTED,
       aRst => reset_1,
       pRst => reset_1,
-      vid_pData(23 downto 0) => dvi2rgb_0_RGB_DATA(23 downto 0),
-      vid_pHSync => dvi2rgb_0_RGB_HSYNC,
-      vid_pVDE => dvi2rgb_0_RGB_ACTIVE_VIDEO,
-      vid_pVSync => dvi2rgb_0_RGB_VSYNC
+      vid_pData(23 downto 0) => dvi2rgb_0_vid_pData(23 downto 0),
+      vid_pHSync => dvi2rgb_0_vid_pHSync,
+      vid_pVDE => dvi2rgb_0_vid_pVDE,
+      vid_pVSync => dvi2rgb_0_vid_pVSync
     );
 rgb2dvi_0: component HDMI_bd_rgb2dvi_0_0
      port map (
@@ -189,10 +201,10 @@ rgb2dvi_0: component HDMI_bd_rgb2dvi_0_0
       TMDS_Data_n(2 downto 0) => rgb2dvi_0_TMDS_DATA_N(2 downto 0),
       TMDS_Data_p(2 downto 0) => rgb2dvi_0_TMDS_DATA_P(2 downto 0),
       aRst => reset_1,
-      vid_pData(23 downto 0) => dvi2rgb_0_RGB_DATA(23 downto 0),
-      vid_pHSync => dvi2rgb_0_RGB_HSYNC,
-      vid_pVDE => dvi2rgb_0_RGB_ACTIVE_VIDEO,
-      vid_pVSync => dvi2rgb_0_RGB_VSYNC
+      vid_pData(23 downto 0) => White_Detector_0_hdmi_out(23 downto 0),
+      vid_pHSync => dvi2rgb_0_vid_pHSync,
+      vid_pVDE => dvi2rgb_0_vid_pVDE,
+      vid_pVSync => dvi2rgb_0_vid_pVSync
     );
 xlconstant_0: component HDMI_bd_xlconstant_0_0
      port map (
