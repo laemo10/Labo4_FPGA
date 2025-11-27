@@ -46,33 +46,79 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:White_Detector:1.0
+-- IP VLNV: xilinx.com:module_ref:hdmi_rectangle_overlay:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY HDMI_bd_White_Detector_0_0 IS
+ENTITY HDMI_bd_hdmi_rectangle_overl_0_0 IS
   PORT (
-    hdmi_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    hdmi_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+    clk : IN STD_LOGIC;
+    rst : IN STD_LOGIC;
+    vde_in : IN STD_LOGIC;
+    hsync_in : IN STD_LOGIC;
+    vsync_in : IN STD_LOGIC;
+    rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+    vde_out : OUT STD_LOGIC;
+    hsync_out : OUT STD_LOGIC;
+    vsync_out : OUT STD_LOGIC;
+    rgb_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
   );
-END HDMI_bd_White_Detector_0_0;
+END HDMI_bd_hdmi_rectangle_overl_0_0;
 
-ARCHITECTURE HDMI_bd_White_Detector_0_0_arch OF HDMI_bd_White_Detector_0_0 IS
+ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_overl_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_White_Detector_0_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT White_Detector IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT hdmi_rectangle_overlay IS
+    GENERIC (
+      H_ACTIVE : INTEGER;
+      V_ACTIVE : INTEGER;
+      RECT_WIDTH : INTEGER;
+      RECT_HEIGHT : INTEGER;
+      EDGE_WIDTH : INTEGER;
+      ENABLE_DEBUG : BOOLEAN
+    );
     PORT (
-      hdmi_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-      hdmi_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
+      clk : IN STD_LOGIC;
+      rst : IN STD_LOGIC;
+      vde_in : IN STD_LOGIC;
+      hsync_in : IN STD_LOGIC;
+      vsync_in : IN STD_LOGIC;
+      rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+      vde_out : OUT STD_LOGIC;
+      hsync_out : OUT STD_LOGIC;
+      vsync_out : OUT STD_LOGIC;
+      rgb_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
     );
-  END COMPONENT White_Detector;
+  END COMPONENT hdmi_rectangle_overlay;
+  ATTRIBUTE X_INTERFACE_INFO : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN HDMI_bd_dvi2rgb_0_0_PixelClk, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF rst: SIGNAL IS "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
 BEGIN
-  U0 : White_Detector
+  U0 : hdmi_rectangle_overlay
+    GENERIC MAP (
+      H_ACTIVE => 1920,
+      V_ACTIVE => 1080,
+      RECT_WIDTH => 560,
+      RECT_HEIGHT => 720,
+      EDGE_WIDTH => 4,
+      ENABLE_DEBUG => true
+    )
     PORT MAP (
-      hdmi_in => hdmi_in,
-      hdmi_out => hdmi_out
+      clk => clk,
+      rst => rst,
+      vde_in => vde_in,
+      hsync_in => hsync_in,
+      vsync_in => vsync_in,
+      rgb_in => rgb_in,
+      vde_out => vde_out,
+      hsync_out => hsync_out,
+      vsync_out => vsync_out,
+      rgb_out => rgb_out
     );
-END HDMI_bd_White_Detector_0_0_arch;
+END HDMI_bd_hdmi_rectangle_overl_0_0_arch;

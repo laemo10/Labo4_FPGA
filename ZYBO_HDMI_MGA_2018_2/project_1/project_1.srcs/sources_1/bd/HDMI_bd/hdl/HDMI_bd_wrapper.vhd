@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Thu Nov 20 11:08:57 2025
+--Date        : Wed Nov 26 22:57:46 2025
 --Host        : pcetu-139 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd_wrapper.bd
 --Design      : HDMI_bd_wrapper
@@ -26,6 +26,7 @@ entity HDMI_bd_wrapper is
     hdmi_out_clk_p : out STD_LOGIC;
     hdmi_out_data_n : out STD_LOGIC_VECTOR ( 2 downto 0 );
     hdmi_out_data_p : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    logic_reset : in STD_LOGIC;
     reset : in STD_LOGIC
   );
 end HDMI_bd_wrapper;
@@ -49,7 +50,8 @@ architecture STRUCTURE of HDMI_bd_wrapper is
     hdmi_out_data_n : out STD_LOGIC_VECTOR ( 2 downto 0 );
     CLK : in STD_LOGIC;
     reset : in STD_LOGIC;
-    hdmi_in_hpd : out STD_LOGIC_VECTOR ( 0 to 0 )
+    hdmi_in_hpd : out STD_LOGIC_VECTOR ( 0 to 0 );
+    logic_reset : in STD_LOGIC
   );
   end component HDMI_bd;
   component IOBUF is
@@ -85,6 +87,7 @@ HDMI_bd_i: component HDMI_bd
       hdmi_out_clk_p => hdmi_out_clk_p,
       hdmi_out_data_n(2 downto 0) => hdmi_out_data_n(2 downto 0),
       hdmi_out_data_p(2 downto 0) => hdmi_out_data_p(2 downto 0),
+      logic_reset => logic_reset,
       reset => reset
     );
 hdmi_in_ddc_scl_iobuf: component IOBUF

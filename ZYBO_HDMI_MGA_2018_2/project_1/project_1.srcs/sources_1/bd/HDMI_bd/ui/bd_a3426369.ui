@@ -1,36 +1,43 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"1.0",
-   "Default View_TopLeft":"-482,-254",
+   "Default View_TopLeft":"-509,-295",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0
 #  -string -flagsOSRD
-preplace port hdmi_in -pg 1 -lvl 0 -x -40 -y -70 -defaultsOSRD
-preplace port hdmi_in_ddc -pg 1 -lvl 4 -x 880 -y -50 -defaultsOSRD
-preplace port hdmi_out -pg 1 -lvl 4 -x 880 -y 200 -defaultsOSRD
-preplace port port-id_CLK -pg 1 -lvl 0 -x -40 -y 190 -defaultsOSRD
-preplace port port-id_reset -pg 1 -lvl 0 -x -40 -y 80 -defaultsOSRD
-preplace portBus hdmi_in_hpd -pg 1 -lvl 4 -x 880 -y 60 -defaultsOSRD
+preplace port hdmi_in -pg 1 -lvl 0 -x -70 -y -70 -defaultsOSRD
+preplace port hdmi_in_ddc -pg 1 -lvl 5 -x 1280 -y -50 -defaultsOSRD
+preplace port hdmi_out -pg 1 -lvl 5 -x 1280 -y 200 -defaultsOSRD
+preplace port port-id_CLK -pg 1 -lvl 0 -x -70 -y 190 -defaultsOSRD
+preplace port port-id_reset -pg 1 -lvl 0 -x -70 -y 80 -defaultsOSRD
+preplace port port-id_logic_reset -pg 1 -lvl 0 -x -70 -y 280 -defaultsOSRD
+preplace portBus hdmi_in_hpd -pg 1 -lvl 5 -x 1280 -y 60 -defaultsOSRD
 preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 120 -y 180 -defaultsOSRD
-preplace inst dvi2rgb_0 -pg 1 -lvl 2 -x 400 -y 0 -defaultsOSRD
-preplace inst rgb2dvi_0 -pg 1 -lvl 3 -x 730 -y 240 -defaultsOSRD
-preplace inst xlconstant_0 -pg 1 -lvl 3 -x 730 -y 60 -defaultsOSRD
-preplace inst White_Detector_0 -pg 1 -lvl 2 -x 400 -y 390 -defaultsOSRD
+preplace inst dvi2rgb_0 -pg 1 -lvl 3 -x 780 -y 40 -defaultsOSRD
+preplace inst rgb2dvi_0 -pg 1 -lvl 4 -x 1130 -y 370 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 4 -x 1130 -y 60 -defaultsOSRD
+preplace inst proc_sys_reset_0 -pg 1 -lvl 2 -x 400 -y 390 -defaultsOSRD
+preplace inst hdmi_rectangle_overl_0 -pg 1 -lvl 3 -x 780 -y 540 -defaultsOSRD
 preplace netloc CLK_1 1 0 1 NJ 190
-preplace netloc clk_wiz_0_clk_out1 1 1 1 210 -10n
-preplace netloc dvi2rgb_0_PixelClk 1 2 1 550 50n
-preplace netloc reset_1 1 0 3 30 80 250 280 NJ
-preplace netloc xlconstant_0_dout 1 3 1 NJ 60
-preplace netloc dvi2rgb_0_vid_pData 1 1 2 260 130 540
-preplace netloc White_Detector_0_hdmi_out 1 2 1 590 200n
-preplace netloc dvi2rgb_0_vid_pHSync 1 2 1 600 -30n
-preplace netloc dvi2rgb_0_vid_pVSync 1 2 1 580 -10n
-preplace netloc dvi2rgb_0_vid_pVDE 1 2 1 560 10n
-preplace netloc dvi2rgb_0_DDC 1 2 2 570J -50 NJ
-preplace netloc hdmi_in_1 1 0 2 -20J -30 NJ
-preplace netloc rgb2dvi_0_TMDS 1 3 1 860J 200n
-levelinfo -pg 1 -40 120 400 730 880
-pagesize -pg 1 -db -bbox -sgen -140 -130 1040 450
+preplace netloc clk_wiz_0_clk_out1 1 1 2 210 30 N
+preplace netloc dvi2rgb_0_PixelClk 1 1 3 230 290 600 420 940
+preplace netloc dvi2rgb_0_vid_pData 1 2 2 620 170 930
+preplace netloc dvi2rgb_0_vid_pHSync 1 2 2 650 180 920
+preplace netloc dvi2rgb_0_vid_pVDE 1 2 2 630 -100 940
+preplace netloc dvi2rgb_0_vid_pVSync 1 2 2 640 -90 910
+preplace netloc hdmi_rectangle_overl_0_hsync_out 1 3 1 950 350n
+preplace netloc hdmi_rectangle_overl_0_rgb_out 1 3 1 960 330n
+preplace netloc hdmi_rectangle_overl_0_vde_out 1 3 1 970 390n
+preplace netloc hdmi_rectangle_overl_0_vsync_out 1 3 1 980 370n
+preplace netloc logic_reset_1 1 0 2 NJ 280 210
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 1 570 430n
+preplace netloc reset_1 1 0 4 30J 80 N 80 610 410 N
+preplace netloc xlconstant_0_dout 1 4 1 NJ 60
+preplace netloc dvi2rgb_0_DDC 1 3 2 980J -50 NJ
+preplace netloc hdmi_in_1 1 0 3 NJ -70 NJ -70 580
+preplace netloc rgb2dvi_0_TMDS 1 4 1 1260J 200n
+levelinfo -pg 1 -70 120 400 780 1130 1280
+pagesize -pg 1 -db -bbox -sgen -200 -290 1450 690
 "
 }
 0
