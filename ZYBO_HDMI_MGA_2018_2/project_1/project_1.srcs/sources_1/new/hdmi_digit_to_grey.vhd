@@ -2,6 +2,9 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
+library work;
+use work.matrix_pkg.all;
+
 entity hdmi_digit_to_grey is
     Generic (
         -- Screen resolution 
@@ -22,8 +25,10 @@ entity hdmi_digit_to_grey is
         vde_in    : in STD_LOGIC;
         hsync_in  : in STD_LOGIC;
         vsync_in  : in STD_LOGIC;
-        rgb_in    : in STD_LOGIC_VECTOR(23 downto 0)    
-        -- Note: Matrix outputs would typically go here
+        rgb_in    : in STD_LOGIC_VECTOR(23 downto 0);
+        -- Final Output 
+        matrix_flat_out : out STD_LOGIC_VECTOR(255 downto 0);
+        data_ready      : out STD_LOGIC
     );
 end hdmi_digit_to_grey;
 
@@ -34,8 +39,8 @@ architecture Behavioral of hdmi_digit_to_grey is
     constant GRID_TOP     : integer := (V_ACTIVE / 2) - ((RECT_HEIGHT * 2) / 9);      
     constant GRID_BOTTOM  : integer := (V_ACTIVE / 2) + ((RECT_HEIGHT * 4) / 9); 
     
-    constant N_ROW        : integer := 10;
-    constant N_COLUMN     : integer := 5;
+    constant N_ROW        : integer := 8;
+    constant N_COLUMN     : integer := 4;
     
     -- Integer division for constants is fine (computed at synthesis time)
     constant ROW_HEIGHT   : integer := RECT_HEIGHT / N_ROW;              
@@ -61,13 +66,15 @@ architecture Behavioral of hdmi_digit_to_grey is
     -- Grayscale Calculation
     signal gray_value : unsigned(7 downto 0);
     signal r_val, g_val, b_val : unsigned(7 downto 0);
-
-    -- Matrix Storage
-    -- 10 rows, 5 columns. 
-    -- Max value per cell approx: 112*72 pixels * 255 val = ~2,000,000 (Requires 21 bits)
-    -- We use 32 bits to be safe.
-    type t_mean_matrix is array(0 to N_ROW-1, 0 to N_COLUMN-1) of unsigned(31 downto 0);
-    signal grid_sums : t_mean_matrix := (others => (others => (others => '0')));
+    
+    -- Configuration
+    constant PIXEL_SHIFT : integer := 8; -- SET THIS: 8 means divide by 256 (e.g., 16x16 block)
+    
+    -- Internal storage (Must be large enough to hold the sum of a whole frame block)
+    -- 24 bits is safe for blocks up to 65k pixels.
+    type t_grid_acc is array (0 to N_ROW-1, 0 to N_COLUMN-1) of unsigned(23 downto 0);
+    signal grid_accumulators : t_grid_acc;
+    signal internal_matrix : t_gray_scale_grid;
 
 begin
 
@@ -112,10 +119,10 @@ begin
         end if;
     end process;
 
+
     ----------------------------------------------------------------
     -- 2. Grid Coordinate Logic (Optimized for Timing)
     ----------------------------------------------------------------
-    -- Instead of dividing v_count / ROW_HEIGHT every cycle, we track it incrementally.
     
     grid_tracker : process(clk)
     begin
@@ -175,44 +182,74 @@ begin
         end if;
     end process;
 
+
     ----------------------------------------------------------------
     -- 3. Grayscale & Accumulation
     ----------------------------------------------------------------
-    
+
     process(clk)
-        variable r_mult : unsigned(15 downto 0);
-        variable g_mult : unsigned(15 downto 0);
-        variable b_mult : unsigned(15 downto 0);
-        variable sum_rgb: unsigned(15 downto 0);
+        variable r_mult   : unsigned(15 downto 0);
+        variable g_mult   : unsigned(15 downto 0);
+        variable b_mult   : unsigned(15 downto 0);
+        variable sum_rgb  : unsigned(15 downto 0);
+        variable gray_val : unsigned(7 downto 0);
     begin
         if rising_edge(clk) then
-            if rst = '1' or (vsync_in = '1' and vsync_prev = '0') then
-                 -- Clear matrix at start of new frame
-                 grid_sums <= (others => (others => (others => '0')));
+            -- Default ready signal to 0
+            data_ready <= '0';
+
+            if rst = '1' then
+                grid_accumulators <= (others => (others => (others => '0')));
+                internal_matrix   <= (others => (others => (others => '0')));
             else
-                -- 1. Extract Colors (Assuming RGB 24-bit: R=23:16, G=15:8, B=7:0)
-                r_val <= unsigned(rgb_in(23 downto 16));
-                g_val <= unsigned(rgb_in(15 downto 8));
-                b_val <= unsigned(rgb_in(7 downto 0));
+                -- Frame Management (VSYNC Rising Edge = Frame Done)
+                if vsync_in = '1' and vsync_prev = '0' then
+                    
+                    -- Calculate Means: Transfer Accumulator to 8-bit Output
+                    for r in 0 to N_ROW-1 loop
+                        for c in 0 to N_COLUMN-1 loop
+                            internal_matrix(r, c) <= grid_accumulators(r, c)(7 + PIXEL_SHIFT downto PIXEL_SHIFT);
+                        end loop;
+                    end loop;
 
-                -- 2. Compute Grayscale (Pipeline Stage 1)
-                -- Using standard coefficients: 0.299R + 0.587G + 0.114B
-                -- Hardware approximation: (77*R + 150*G + 29*B) >> 8
-                r_mult  := r_val * to_unsigned(77, 8);
-                g_mult  := g_val * to_unsigned(150, 8);
-                b_mult  := b_val * to_unsigned(29, 8);
-                sum_rgb := r_mult + g_mult + b_mult;
-                
-                gray_value <= sum_rgb(15 downto 8); -- Divide by 256
+                    -- Signal that the 8-bit matrix is valid
+                    data_ready <= '1';
 
-                -- 3. Accumulate in Matrix (Pipeline Stage 2)
-                -- We only write if we are inside valid grid coordinates and valid video
-                if vde_in = '1' and inside_grid_v and inside_grid_h then
-                     grid_sums(curr_row, curr_col) <= grid_sums(curr_row, curr_col) + resize(gray_value, 32);
+                    -- Reset Accumulators for the next frame
+                    grid_accumulators <= (others => (others => (others => '0')));
+
+                else
+                    -- Normal Active Video Processing
+                    r_val <= unsigned(rgb_in(23 downto 16));
+                    g_val <= unsigned(rgb_in(15 downto 8));
+                    b_val <= unsigned(rgb_in(7 downto 0));
+
+                    r_mult  := r_val * to_unsigned(77, 8);
+                    g_mult  := g_val * to_unsigned(150, 8);
+                    b_mult  := b_val * to_unsigned(29, 8);
+                    sum_rgb := r_mult + g_mult + b_mult;
+                    gray_val := sum_rgb(15 downto 8);
+
+                    -- We simply add to the big bucket. No division yet.
+                    if vde_in = '1' and inside_grid_v and inside_grid_h then
+                        grid_accumulators(curr_row, curr_col) <= 
+                            grid_accumulators(curr_row, curr_col) + resize(gray_val, 24);
+                    end if;
+
                 end if;
-
             end if;
         end if;
     end process;
+
+
+    -------------------------------------------------------
+    -- The "Flattening" Logic (Map 2D -> 1D)
+    -------------------------------------------------------
+    gen_flatten_row: for r in 0 to N_ROW-1 generate
+        gen_flatten_col: for c in 0 to N_COLUMN-1 generate
+            matrix_flat_out( ((r * 4 + c) * 8) + 7 downto ((r * 4 + c) * 8) ) 
+                <= std_logic_vector( internal_matrix(r, c) );
+        end generate;
+    end generate;
 
 end Behavioral;

@@ -205,3 +205,18 @@ set_property -dict {PACKAGE_PIN B19 IOSTANDARD TMDS_33} [get_ports {hdmi_out_dat
 
 set_property PACKAGE_PIN T14 [get_ports logic_reset]
 set_property IOSTANDARD LVCMOS33 [get_ports logic_reset]
+
+set_property PACKAGE_PIN V12 [get_ports out0_0]
+set_property PACKAGE_PIN W16 [get_ports out1_0]
+set_property PACKAGE_PIN J15 [get_ports out2_0]
+set_property PACKAGE_PIN H15 [get_ports out3_0]
+set_property PACKAGE_PIN V13 [get_ports out4_0]
+set_property PACKAGE_PIN U17 [get_ports out5_0]
+set_property PACKAGE_PIN T17 [get_ports out6_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out0_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out1_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out2_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out3_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out4_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out5_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out6_0]

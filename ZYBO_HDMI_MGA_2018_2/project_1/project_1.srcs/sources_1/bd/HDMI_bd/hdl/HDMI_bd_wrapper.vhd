@@ -2,8 +2,8 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Thu Nov 27 20:31:26 2025
---Host        : pcetu-189 running 64-bit major release  (build 9200)
+--Date        : Fri Nov 28 00:50:44 2025
+--Host        : pcetu-139 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd_wrapper.bd
 --Design      : HDMI_bd_wrapper
 --Purpose     : IP block netlist
@@ -27,6 +27,13 @@ entity HDMI_bd_wrapper is
     hdmi_out_data_n : out STD_LOGIC_VECTOR ( 2 downto 0 );
     hdmi_out_data_p : out STD_LOGIC_VECTOR ( 2 downto 0 );
     logic_reset : in STD_LOGIC;
+    out0_0 : out STD_LOGIC;
+    out1_0 : out STD_LOGIC;
+    out2_0 : out STD_LOGIC;
+    out3_0 : out STD_LOGIC;
+    out4_0 : out STD_LOGIC;
+    out5_0 : out STD_LOGIC;
+    out6_0 : out STD_LOGIC;
     reset : in STD_LOGIC
   );
 end HDMI_bd_wrapper;
@@ -51,7 +58,14 @@ architecture STRUCTURE of HDMI_bd_wrapper is
     CLK : in STD_LOGIC;
     reset : in STD_LOGIC;
     hdmi_in_hpd : out STD_LOGIC_VECTOR ( 0 to 0 );
-    logic_reset : in STD_LOGIC
+    logic_reset : in STD_LOGIC;
+    out0_0 : out STD_LOGIC;
+    out1_0 : out STD_LOGIC;
+    out2_0 : out STD_LOGIC;
+    out3_0 : out STD_LOGIC;
+    out4_0 : out STD_LOGIC;
+    out5_0 : out STD_LOGIC;
+    out6_0 : out STD_LOGIC
   );
   end component HDMI_bd;
   component IOBUF is
@@ -88,6 +102,13 @@ HDMI_bd_i: component HDMI_bd
       hdmi_out_data_n(2 downto 0) => hdmi_out_data_n(2 downto 0),
       hdmi_out_data_p(2 downto 0) => hdmi_out_data_p(2 downto 0),
       logic_reset => logic_reset,
+      out0_0 => out0_0,
+      out1_0 => out1_0,
+      out2_0 => out2_0,
+      out3_0 => out3_0,
+      out4_0 => out4_0,
+      out5_0 => out5_0,
+      out6_0 => out6_0,
       reset => reset
     );
 hdmi_in_ddc_scl_iobuf: component IOBUF

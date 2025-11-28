@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Nov 27 20:31:26 2025" VIVADOVERSION="2023.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Nov 28 00:50:44 2025" VIVADOVERSION="2023.1">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="HDMI_bd" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -95,6 +95,41 @@
     <PORT DIR="I" NAME="logic_reset" SIGIS="undef" SIGNAME="External_Ports_logic_reset">
       <CONNECTIONS>
         <CONNECTION INSTANCE="proc_sys_reset_0" PORT="ext_reset_in"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out0_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out0">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out0"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out1_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out1">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out1"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out2_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out2">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out2"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out3_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out3">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out3"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out4_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out4">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out4"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out5_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out5">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out5"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out6_0" SIGIS="undef" SIGNAME="debug_led_parser_0_out6">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="debug_led_parser_0" PORT="out6"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -728,6 +763,56 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/debug_led_parser_0" HWVERSION="1.0" INSTANCE="debug_led_parser_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="debug_led_parser" VLNV="xilinx.com:module_ref:debug_led_parser:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="HDMI_bd_debug_led_parser_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" LEFT="255" NAME="grid_in" RIGHT="0" SIGIS="undef" SIGNAME="gray_scale_reg_0_grid_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="gray_scale_reg_0" PORT="grid_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out0" SIGIS="undef" SIGNAME="debug_led_parser_0_out0">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out0_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out1" SIGIS="undef" SIGNAME="debug_led_parser_0_out1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out1_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out2" SIGIS="undef" SIGNAME="debug_led_parser_0_out2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out2_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out3" SIGIS="undef" SIGNAME="debug_led_parser_0_out3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out3_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out4" SIGIS="undef" SIGNAME="debug_led_parser_0_out4">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out4_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out5" SIGIS="undef" SIGNAME="debug_led_parser_0_out5">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out5_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out6" SIGIS="undef" SIGNAME="debug_led_parser_0_out6">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out6_0"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
     <MODULE COREREVISION="5" FULLNAME="/dvi2rgb_0" HWVERSION="1.8" INSTANCE="dvi2rgb_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="dvi2rgb" VLNV="digilentinc.com:ip:dvi2rgb:1.8">
       <DOCUMENTS>
         <DOCUMENT SOURCE="c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/repo/vivado-library/ip/dvi2rgb/docs/dvi2rgb.pdf"/>
@@ -780,21 +865,25 @@
         <PORT DIR="O" LEFT="23" NAME="vid_pData" RIGHT="0" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pData">
           <CONNECTIONS>
             <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="rgb_in"/>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="rgb_in"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="vid_pVDE" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pVDE">
           <CONNECTIONS>
             <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="vde_in"/>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="vde_in"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="vid_pHSync" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pHSync">
           <CONNECTIONS>
             <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="hsync_in"/>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="hsync_in"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="vid_pVSync" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pVSync">
           <CONNECTIONS>
             <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="vsync_in"/>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="vsync_in"/>
           </CONNECTIONS>
         </PORT>
         <PORT CLKFREQUENCY="100000000" DIR="O" NAME="PixelClk" SIGIS="clk" SIGNAME="dvi2rgb_0_PixelClk">
@@ -802,6 +891,8 @@
             <CONNECTION INSTANCE="rgb2dvi_0" PORT="PixelClk"/>
             <CONNECTION INSTANCE="proc_sys_reset_0" PORT="slowest_sync_clk"/>
             <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="clk"/>
+            <CONNECTION INSTANCE="gray_scale_reg_0" PORT="clk"/>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="clk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="aPixelClkLckd" SIGIS="undef"/>
@@ -869,6 +960,97 @@
           </PORTMAPS>
         </BUSINTERFACE>
       </BUSINTERFACES>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/gray_scale_reg_0" HWVERSION="1.0" INSTANCE="gray_scale_reg_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="gray_scale_reg" VLNV="xilinx.com:module_ref:gray_scale_reg:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="HDMI_bd_gray_scale_reg_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="rst" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="dvi2rgb_0_PixelClk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="PixelClk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="rdy" SIGIS="undef" SIGNAME="hdmi_digit_to_grey_0_data_ready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="data_ready"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="255" NAME="grid_in" RIGHT="0" SIGIS="undef" SIGNAME="hdmi_digit_to_grey_0_matrix_flat_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="matrix_flat_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="255" NAME="grid_out" RIGHT="0" SIGIS="undef" SIGNAME="gray_scale_reg_0_grid_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="debug_led_parser_0" PORT="grid_in"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/hdmi_digit_to_grey_0" HWVERSION="1.0" INSTANCE="hdmi_digit_to_grey_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="hdmi_digit_to_grey" VLNV="xilinx.com:module_ref:hdmi_digit_to_grey:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="H_ACTIVE" VALUE="1600"/>
+        <PARAMETER NAME="V_ACTIVE" VALUE="900"/>
+        <PARAMETER NAME="RECT_WIDTH" VALUE="560"/>
+        <PARAMETER NAME="RECT_HEIGHT" VALUE="720"/>
+        <PARAMETER NAME="EDGE_WIDTH" VALUE="4"/>
+        <PARAMETER NAME="ENABLE_DEBUG" VALUE="true"/>
+        <PARAMETER NAME="Component_Name" VALUE="HDMI_bd_hdmi_digit_to_grey_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="dvi2rgb_0_PixelClk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="PixelClk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="rst" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="vde_in" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pVDE">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="vid_pVDE"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="hsync_in" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pHSync">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="vid_pHSync"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="vsync_in" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pVSync">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="vid_pVSync"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="23" NAME="rgb_in" RIGHT="0" SIGIS="undef" SIGNAME="dvi2rgb_0_vid_pData">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="vid_pData"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="255" NAME="matrix_flat_out" RIGHT="0" SIGIS="undef" SIGNAME="hdmi_digit_to_grey_0_matrix_flat_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="gray_scale_reg_0" PORT="grid_in"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="data_ready" SIGIS="undef" SIGNAME="hdmi_digit_to_grey_0_data_ready">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="gray_scale_reg_0" PORT="rdy"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
     </MODULE>
     <MODULE COREREVISION="1" FULLNAME="/hdmi_rectangle_overl_0" HWVERSION="1.0" INSTANCE="hdmi_rectangle_overl_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="hdmi_rectangle_overlay" VLNV="xilinx.com:module_ref:hdmi_rectangle_overlay:1.0">
       <DOCUMENTS/>
@@ -976,6 +1158,8 @@
         <PORT DIR="O" LEFT="0" NAME="peripheral_aresetn" POLARITY="ACTIVE_LOW" RIGHT="0" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
           <CONNECTIONS>
             <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="rst"/>
+            <CONNECTION INSTANCE="gray_scale_reg_0" PORT="rst"/>
+            <CONNECTION INSTANCE="hdmi_digit_to_grey_0" PORT="rst"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

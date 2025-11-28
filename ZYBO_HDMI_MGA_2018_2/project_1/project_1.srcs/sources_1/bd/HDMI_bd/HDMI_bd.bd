@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xB8BE489BCA6D92DB",
+      "boundary_crc": "0xE978DEB7A78C2491",
       "device": "xc7z020clg400-1",
       "name": "HDMI_bd",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
@@ -15,7 +15,10 @@
       "rgb2dvi_0": "",
       "xlconstant_0": "",
       "proc_sys_reset_0": "",
-      "hdmi_rectangle_overl_0": ""
+      "hdmi_rectangle_overl_0": "",
+      "debug_led_parser_0": "",
+      "gray_scale_reg_0": "",
+      "hdmi_digit_to_grey_0": ""
     },
     "interface_ports": {
       "hdmi_in": {
@@ -150,6 +153,27 @@
       },
       "logic_reset": {
         "direction": "I"
+      },
+      "out0_0": {
+        "direction": "O"
+      },
+      "out1_0": {
+        "direction": "O"
+      },
+      "out2_0": {
+        "direction": "O"
+      },
+      "out3_0": {
+        "direction": "O"
+      },
+      "out4_0": {
+        "direction": "O"
+      },
+      "out5_0": {
+        "direction": "O"
+      },
+      "out6_0": {
+        "direction": "O"
       }
     },
     "components": {
@@ -314,6 +338,154 @@
             "right": "0"
           }
         }
+      },
+      "debug_led_parser_0": {
+        "vlnv": "xilinx.com:module_ref:debug_led_parser:1.0",
+        "xci_name": "HDMI_bd_debug_led_parser_0_0",
+        "xci_path": "ip\\HDMI_bd_debug_led_parser_0_0\\HDMI_bd_debug_led_parser_0_0.xci",
+        "inst_hier_path": "debug_led_parser_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "debug_led_parser",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "grid_in": {
+            "direction": "I",
+            "left": "255",
+            "right": "0"
+          },
+          "out0": {
+            "direction": "O"
+          },
+          "out1": {
+            "direction": "O"
+          },
+          "out2": {
+            "direction": "O"
+          },
+          "out3": {
+            "direction": "O"
+          },
+          "out4": {
+            "direction": "O"
+          },
+          "out5": {
+            "direction": "O"
+          },
+          "out6": {
+            "direction": "O"
+          }
+        }
+      },
+      "gray_scale_reg_0": {
+        "vlnv": "xilinx.com:module_ref:gray_scale_reg:1.0",
+        "xci_name": "HDMI_bd_gray_scale_reg_0_0",
+        "xci_path": "ip\\HDMI_bd_gray_scale_reg_0_0\\HDMI_bd_gray_scale_reg_0_0.xci",
+        "inst_hier_path": "gray_scale_reg_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "gray_scale_reg",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "rst": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_LOW",
+                "value_src": "const_prop"
+              }
+            }
+          },
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "HDMI_bd_dvi2rgb_0_0_PixelClk",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "rdy": {
+            "direction": "I"
+          },
+          "grid_in": {
+            "direction": "I",
+            "left": "255",
+            "right": "0"
+          },
+          "grid_out": {
+            "direction": "O",
+            "left": "255",
+            "right": "0"
+          }
+        }
+      },
+      "hdmi_digit_to_grey_0": {
+        "vlnv": "xilinx.com:module_ref:hdmi_digit_to_grey:1.0",
+        "xci_name": "HDMI_bd_hdmi_digit_to_grey_0_0",
+        "xci_path": "ip\\HDMI_bd_hdmi_digit_to_grey_0_0\\HDMI_bd_hdmi_digit_to_grey_0_0.xci",
+        "inst_hier_path": "hdmi_digit_to_grey_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "hdmi_digit_to_grey",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "HDMI_bd_dvi2rgb_0_0_PixelClk",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_LOW",
+                "value_src": "const_prop"
+              }
+            }
+          },
+          "vde_in": {
+            "direction": "I"
+          },
+          "hsync_in": {
+            "direction": "I"
+          },
+          "vsync_in": {
+            "direction": "I"
+          },
+          "rgb_in": {
+            "direction": "I",
+            "left": "23",
+            "right": "0"
+          },
+          "matrix_flat_out": {
+            "direction": "O",
+            "left": "255",
+            "right": "0"
+          },
+          "data_ready": {
+            "direction": "O"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -349,36 +521,102 @@
           "dvi2rgb_0/RefClk"
         ]
       },
+      "debug_led_parser_0_out0": {
+        "ports": [
+          "debug_led_parser_0/out0",
+          "out0_0"
+        ]
+      },
+      "debug_led_parser_0_out1": {
+        "ports": [
+          "debug_led_parser_0/out1",
+          "out1_0"
+        ]
+      },
+      "debug_led_parser_0_out2": {
+        "ports": [
+          "debug_led_parser_0/out2",
+          "out2_0"
+        ]
+      },
+      "debug_led_parser_0_out3": {
+        "ports": [
+          "debug_led_parser_0/out3",
+          "out3_0"
+        ]
+      },
+      "debug_led_parser_0_out4": {
+        "ports": [
+          "debug_led_parser_0/out4",
+          "out4_0"
+        ]
+      },
+      "debug_led_parser_0_out5": {
+        "ports": [
+          "debug_led_parser_0/out5",
+          "out5_0"
+        ]
+      },
+      "debug_led_parser_0_out6": {
+        "ports": [
+          "debug_led_parser_0/out6",
+          "out6_0"
+        ]
+      },
       "dvi2rgb_0_PixelClk": {
         "ports": [
           "dvi2rgb_0/PixelClk",
           "rgb2dvi_0/PixelClk",
           "proc_sys_reset_0/slowest_sync_clk",
-          "hdmi_rectangle_overl_0/clk"
+          "hdmi_rectangle_overl_0/clk",
+          "gray_scale_reg_0/clk",
+          "hdmi_digit_to_grey_0/clk"
         ]
       },
       "dvi2rgb_0_vid_pData": {
         "ports": [
           "dvi2rgb_0/vid_pData",
-          "hdmi_rectangle_overl_0/rgb_in"
+          "hdmi_rectangle_overl_0/rgb_in",
+          "hdmi_digit_to_grey_0/rgb_in"
         ]
       },
       "dvi2rgb_0_vid_pHSync": {
         "ports": [
           "dvi2rgb_0/vid_pHSync",
-          "hdmi_rectangle_overl_0/hsync_in"
+          "hdmi_rectangle_overl_0/hsync_in",
+          "hdmi_digit_to_grey_0/hsync_in"
         ]
       },
       "dvi2rgb_0_vid_pVDE": {
         "ports": [
           "dvi2rgb_0/vid_pVDE",
-          "hdmi_rectangle_overl_0/vde_in"
+          "hdmi_rectangle_overl_0/vde_in",
+          "hdmi_digit_to_grey_0/vde_in"
         ]
       },
       "dvi2rgb_0_vid_pVSync": {
         "ports": [
           "dvi2rgb_0/vid_pVSync",
-          "hdmi_rectangle_overl_0/vsync_in"
+          "hdmi_rectangle_overl_0/vsync_in",
+          "hdmi_digit_to_grey_0/vsync_in"
+        ]
+      },
+      "gray_scale_reg_0_grid_out": {
+        "ports": [
+          "gray_scale_reg_0/grid_out",
+          "debug_led_parser_0/grid_in"
+        ]
+      },
+      "hdmi_digit_to_grey_0_data_ready": {
+        "ports": [
+          "hdmi_digit_to_grey_0/data_ready",
+          "gray_scale_reg_0/rdy"
+        ]
+      },
+      "hdmi_digit_to_grey_0_matrix_flat_out": {
+        "ports": [
+          "hdmi_digit_to_grey_0/matrix_flat_out",
+          "gray_scale_reg_0/grid_in"
         ]
       },
       "hdmi_rectangle_overl_0_hsync_out": {
@@ -414,7 +652,9 @@
       "proc_sys_reset_0_peripheral_aresetn": {
         "ports": [
           "proc_sys_reset_0/peripheral_aresetn",
-          "hdmi_rectangle_overl_0/rst"
+          "hdmi_rectangle_overl_0/rst",
+          "gray_scale_reg_0/rst",
+          "hdmi_digit_to_grey_0/rst"
         ]
       },
       "reset_1": {
