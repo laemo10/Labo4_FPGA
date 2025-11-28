@@ -98,7 +98,7 @@ ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_ove
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF HDMI_bd_hdmi_rectangle_overl_0_0_arch : ARCHITECTURE IS "HDMI_bd_hdmi_rectangle_overl_0_0,hdmi_rectangle_overlay,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "HDMI_bd_hdmi_rectangle_overl_0_0,hdmi_rectangle_overlay,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=hdmi_rectangle_overlay,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,H_ACTIVE=1920,V_ACTIVE=1080,RECT_WIDTH=560,RECT_HEIGHT=720,EDGE_WIDTH=4,ENABLE_DEBUG=true}";
+  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "HDMI_bd_hdmi_rectangle_overl_0_0,hdmi_rectangle_overlay,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=hdmi_rectangle_overlay,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,H_ACTIVE=1600,V_ACTIVE=900,RECT_WIDTH=560,RECT_HEIGHT=720,EDGE_WIDTH=4,ENABLE_DEBUG=true}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
   ATTRIBUTE IP_DEFINITION_SOURCE OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -110,8 +110,8 @@ ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_ove
 BEGIN
   U0 : hdmi_rectangle_overlay
     GENERIC MAP (
-      H_ACTIVE => 1920,
-      V_ACTIVE => 1080,
+      H_ACTIVE => 1600,
+      V_ACTIVE => 900,
       RECT_WIDTH => 560,
       RECT_HEIGHT => 720,
       EDGE_WIDTH => 4,

@@ -2,8 +2,8 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
--- Date        : Wed Nov 26 22:58:21 2025
--- Host        : pcetu-139 running 64-bit major release  (build 9200)
+-- Date        : Thu Nov 27 20:31:49 2025
+-- Host        : pcetu-189 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
 --               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_hdmi_rectangle_overl_0_0/HDMI_bd_hdmi_rectangle_overl_0_0_stub.vhdl
 -- Design      : HDMI_bd_hdmi_rectangle_overl_0_0

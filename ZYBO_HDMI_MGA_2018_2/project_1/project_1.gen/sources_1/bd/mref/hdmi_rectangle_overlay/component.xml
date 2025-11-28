@@ -55,7 +55,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>1adc0e83</spirit:value>
+            <spirit:value>439b44f4</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -68,7 +68,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>1adc0e83</spirit:value>
+            <spirit:value>439b44f4</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -225,12 +225,12 @@
       <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
         <spirit:name>H_ACTIVE</spirit:name>
         <spirit:displayName>H Active</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.H_ACTIVE">1920</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.H_ACTIVE">1600</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>V_ACTIVE</spirit:name>
         <spirit:displayName>V Active</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.V_ACTIVE">1080</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.V_ACTIVE">900</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>RECT_WIDTH</spirit:name>
@@ -270,12 +270,12 @@
     <spirit:parameter>
       <spirit:name>H_ACTIVE</spirit:name>
       <spirit:displayName>H Active</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.H_ACTIVE">1920</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.H_ACTIVE">1600</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>V_ACTIVE</spirit:name>
       <spirit:displayName>V Active</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.V_ACTIVE">1080</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.V_ACTIVE">900</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>RECT_WIDTH</spirit:name>
@@ -317,7 +317,7 @@
         <xilinx:designToolContext>IPI</xilinx:designToolContext>
       </xilinx:designToolContexts>
       <xilinx:coreRevision>1</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2025-11-27T03:57:40Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2025-11-28T01:29:37Z</xilinx:coreCreationDateTime>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2023.1</xilinx:xilinxVersion>

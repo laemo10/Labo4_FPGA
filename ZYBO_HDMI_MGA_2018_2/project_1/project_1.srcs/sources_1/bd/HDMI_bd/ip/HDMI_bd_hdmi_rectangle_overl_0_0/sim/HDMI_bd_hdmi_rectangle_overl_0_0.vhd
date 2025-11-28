@@ -102,8 +102,8 @@ ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_ove
 BEGIN
   U0 : hdmi_rectangle_overlay
     GENERIC MAP (
-      H_ACTIVE => 1920,
-      V_ACTIVE => 1080,
+      H_ACTIVE => 1600,
+      V_ACTIVE => 900,
       RECT_WIDTH => 560,
       RECT_HEIGHT => 720,
       EDGE_WIDTH => 4,

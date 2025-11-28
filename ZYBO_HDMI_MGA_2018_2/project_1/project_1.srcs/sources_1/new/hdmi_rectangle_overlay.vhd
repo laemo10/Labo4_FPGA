@@ -5,8 +5,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity hdmi_rectangle_overlay is
     Generic (
         -- Screen resolution 
-        H_ACTIVE : integer := 1920;
-        V_ACTIVE : integer := 1080;
+        H_ACTIVE : integer := 1600;
+        V_ACTIVE : integer := 900;
         -- Rectangle dimensions 
         RECT_WIDTH  : integer := 560;
         RECT_HEIGHT : integer := 720;
@@ -45,10 +45,10 @@ architecture Behavioral of hdmi_rectangle_overlay is
     
     -- debug grid
     constant DEBUG_LEFT   : integer := RECT_LEFT;
-    constant DEBUG_RIGHT  : integer := RECT_RIGHT;
-    constant DEBUG_TOP    : integer := RECT_TOP - (RECT_HEIGHT * 5 / 18);      -- Smaller value (upper edge)
-    constant DEBUG_BOTTOM : integer := RECT_BOTTOM + (RECT_HEIGHT / 18);       -- Larger value (lower edge)
-    constant N_ROW        : integer := 4;
+    constant DEBUG_RIGHT  : integer := RECT_RIGHT - (RECT_WIDTH / 2) ;
+    constant DEBUG_TOP    : integer := RECT_TOP + ((RECT_HEIGHT * 5) / 18);      -- Smaller value (upper edge)
+    constant DEBUG_BOTTOM : integer := RECT_BOTTOM - (RECT_HEIGHT / 18);       -- Larger value (lower edge)
+    constant N_ROW        : integer := 8;
     constant N_COLUMN     : integer := 4;
     constant ROW_HEIGHT   : integer := (DEBUG_BOTTOM - DEBUG_TOP) / N_ROW;     -- Positive value
     constant COLUMN_WIDTH : integer := (DEBUG_RIGHT - DEBUG_LEFT) / N_COLUMN;  -- Fixed divisor
@@ -58,6 +58,8 @@ architecture Behavioral of hdmi_rectangle_overlay is
     -- sync previous samples for edge detection
     signal hsync_prev : std_logic := '0';
     signal vsync_prev : std_logic := '0';
+    signal vde_prev : std_logic := '0';
+    signal v_started : boolean := false;
 
     -- pipeline registers to align timing
     signal vde_reg    : std_logic := '0';
@@ -78,40 +80,54 @@ begin
     -- Count pixels across the entire line (including blanking)
     -- Use hsync rising edge to reset horizontal counter and advance v_count.
     -- Use vsync rising edge to reset vertical counter.
-    ----------------------------------------------------------------
+
     position_counter : process(clk)
     begin
         if rising_edge(clk) then
             if rst = '1' then
                 h_count    <= 0;
                 v_count    <= 0;
-                hsync_prev <= '0';
+                v_started  <= false;
                 vsync_prev <= '0';
+                vde_prev   <= '0';
             else
-                -- Mémoriser les valeurs précédentes des syncs
-                hsync_prev <= hsync_in;
+                -- Store previous states for edge detection
                 vsync_prev <= vsync_in;
-                
-                -- Détection du front montant de vsync = début de nouvelle frame
-                if (vsync_in = '1' and vsync_prev = '0') then
-                    v_count <= 0;
-                    h_count <= 0;
-                
-                -- Détection du front montant de hsync = nouvelle ligne
-                elsif (hsync_in = '1' and hsync_prev = '0') then
-                    h_count <= 0;
-                    -- Incrémenter v_count seulement si on est dans la zone active verticale
-                    if v_count < V_ACTIVE - 1 then
-                        v_count <= v_count + 1;
+                vde_prev   <= vde_in;
+
+                if (vsync_in = '1' and vsync_prev = '0') then 
+                    v_started <= false; 
+                end if;
+
+                -- CASE A: Start of a NEW LINE (Rising Edge of VDE)
+                if (vde_in = '1' and vde_prev = '0') then
+                    
+                    -- Always reset Horizontal Counter to 0 at start of line
+                    h_count <= 0; 
+
+                    -- Handle Vertical Counter
+                    if (v_started = false) then
+                        -- This is the very first line after a VSYNC
+                        v_count   <= 0;
+                        v_started <= true;
+                    else
+                        -- This is a subsequent line, increment Y
+                        if v_count < V_ACTIVE - 1 then
+                            v_count <= v_count + 1;
+                        end if;
                     end if;
-                
-                -- Pendant les pixels actifs, compter horizontalement
-                elsif vde_in = '1' then
+
+                -- CASE B: Inside Active Video (VDE is High and Steady)
+                elsif (vde_in = '1') then
+                    -- Increment Horizontal Counter
                     if h_count < H_ACTIVE - 1 then
                         h_count <= h_count + 1;
                     end if;
-                end if;
                 
+                -- CASE C: Blanking interval (VDE is Low)
+                else
+                end if;
+
             end if;
         end if;
     end process;
@@ -140,30 +156,38 @@ begin
         else
             is_edge <= '0';
         end if;
-        
+    end process;
+    
+    grid_detect : process(h_count, v_count)
+    variable rel_x, rel_y : integer;
+    begin
         if (ENABLE_DEBUG) then 
-            is_debug_grid <= '0';  -- default value
-            
-            -- Vertical lines
-            for i in 0 to N_COLUMN-1 loop
-                if (h_count >= (DEBUG_LEFT + i * COLUMN_WIDTH) and 
-                    h_count < (DEBUG_LEFT + i * COLUMN_WIDTH + EDGE_WIDTH) and
-                    v_count >= DEBUG_TOP and v_count <= DEBUG_BOTTOM) then
-                    is_debug_grid <= '1'; 
-                end if;
-            end loop;
-            
-            -- Horizontal lines
-            for i in 0 to N_ROW-1 loop
-                if (v_count >= (DEBUG_TOP + i * ROW_HEIGHT) and 
-                    v_count < (DEBUG_TOP + i * ROW_HEIGHT + EDGE_WIDTH) and
-                    h_count >= DEBUG_LEFT and h_count <= DEBUG_RIGHT) then
+            -- 1. Default to 0 to prevent latches
+            is_debug_grid <= '0';
+    
+            -- 2. Calculate position relative to the grid origin
+            rel_x := h_count - DEBUG_LEFT;
+            rel_y := v_count - DEBUG_TOP;
+    
+            -- 3. Check if we are physically inside the Grid Area
+            if (h_count >= DEBUG_LEFT and h_count <= DEBUG_RIGHT) and 
+               (v_count >= DEBUG_TOP  and v_count <= DEBUG_BOTTOM) then
+                
+                -- VERTICAL LINES
+                -- logic: If the relative X position is a multiple of WIDTH
+                if (rel_x mod COLUMN_WIDTH) < EDGE_WIDTH then
                     is_debug_grid <= '1';
                 end if;
-            end loop;
-        end if;
-       
-    end process;
+    
+                -- HORIZONTAL LINES
+                -- logic: If the relative Y position is a multiple of HEIGHT
+                if (rel_y mod ROW_HEIGHT) < EDGE_WIDTH then
+                    is_debug_grid <= '1';
+                end if;
+            end if;
+         end if;
+     end process;
+    
     
     ----------------------------------------------------------------
     -- Pipeline the incoming signals (1-cycle)
@@ -177,20 +201,14 @@ begin
                 vsync_reg  <= '0';
                 rgb_reg    <= (others => '0');
                 is_edge_reg <= '0';
-                
-                if (ENABLE_DEBUG) then 
-                    is_debug_grid <= '0';
-                end if;
+                is_debug_grid_reg <= '0';
             else
                 vde_reg    <= vde_in;
                 hsync_reg  <= hsync_in;
                 vsync_reg  <= vsync_in;
                 rgb_reg    <= rgb_in;
                 is_edge_reg <= is_edge;
-                
-                if (ENABLE_DEBUG) then 
-                    is_debug_grid_reg <= is_debug_grid;
-                end if;
+                is_debug_grid_reg <= is_debug_grid;
             end if;
         end if;
     end process;

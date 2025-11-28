@@ -8,8 +8,8 @@
     "gen_directory": ".",
     "parameters": {
       "component_parameters": {
-        "H_ACTIVE": [ { "value": "1920", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "V_ACTIVE": [ { "value": "1080", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "H_ACTIVE": [ { "value": "1600", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "V_ACTIVE": [ { "value": "900", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "RECT_WIDTH": [ { "value": "560", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "RECT_HEIGHT": [ { "value": "720", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "EDGE_WIDTH": [ { "value": "4", "resolve_type": "user", "format": "long", "usage": "all" } ],
@@ -17,8 +17,8 @@
         "Component_Name": [ { "value": "HDMI_bd_hdmi_rectangle_overl_0_0", "resolve_type": "user", "usage": "all" } ]
       },
       "model_parameters": {
-        "H_ACTIVE": [ { "value": "1920", "resolve_type": "generated", "format": "long", "usage": "all" } ],
-        "V_ACTIVE": [ { "value": "1080", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "H_ACTIVE": [ { "value": "1600", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "V_ACTIVE": [ { "value": "900", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "RECT_WIDTH": [ { "value": "560", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "RECT_HEIGHT": [ { "value": "720", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "EDGE_WIDTH": [ { "value": "4", "resolve_type": "generated", "format": "long", "usage": "all" } ],
