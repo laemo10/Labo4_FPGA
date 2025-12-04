@@ -2,8 +2,8 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-// Date        : Wed Dec  3 21:36:07 2025
-// Host        : pcetu-199 running 64-bit major release  (build 9200)
+// Date        : Thu Dec  4 10:46:52 2025
+// Host        : pcetu-129 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_speed_detection_0_0/HDMI_bd_speed_detection_0_0_stub.v
 // Design      : HDMI_bd_speed_detection_0_0
@@ -15,9 +15,14 @@
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "speed_detection,Vivado 2023.1" *)
-module HDMI_bd_speed_detection_0_0(digit_in, out0, out1, out2, out3, out4, out5, out6)
-/* synthesis syn_black_box black_box_pad_pin="digit_in[6:0],out0,out1,out2,out3,out4,out5,out6" */;
-  input [6:0]digit_in;
+module HDMI_bd_speed_detection_0_0(clk, rst, grid_in, speed_out, out0, out1, out2, out3, 
+  out4, out5, out6, out7)
+/* synthesis syn_black_box black_box_pad_pin="rst,grid_in[7:0],speed_out[7:0],out0,out1,out2,out3,out4,out5,out6,out7" */
+/* synthesis syn_force_seq_prim="clk" */;
+  input clk /* synthesis syn_isclock = 1 */;
+  input rst;
+  input [7:0]grid_in;
+  output [7:0]speed_out;
   output out0;
   output out1;
   output out2;
@@ -25,4 +30,5 @@ module HDMI_bd_speed_detection_0_0(digit_in, out0, out1, out2, out3, out4, out5,
   output out4;
   output out5;
   output out6;
+  output out7;
 endmodule

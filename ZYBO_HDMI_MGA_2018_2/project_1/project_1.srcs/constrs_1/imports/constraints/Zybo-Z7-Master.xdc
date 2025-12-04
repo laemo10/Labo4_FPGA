@@ -220,3 +220,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports out3_0]
 set_property IOSTANDARD LVCMOS33 [get_ports out4_0]
 set_property IOSTANDARD LVCMOS33 [get_ports out5_0]
 set_property IOSTANDARD LVCMOS33 [get_ports out6_0]
+
+set_property PACKAGE_PIN Y17 [get_ports out7_0]
+set_property IOSTANDARD LVCMOS33 [get_ports out7_0]

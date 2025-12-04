@@ -92,6 +92,12 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/new/position_counter.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/matrix_pkg.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -104,7 +110,7 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/position_counter.vhd">
+      <File Path="$PSRCDIR/sources_1/new/speed_detection.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -116,29 +122,20 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/speed_detection.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/bd/HDMI_bd/HDMI_bd.bd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_digit_detection_0_0/HDMI_bd_digit_detection_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_digit_detection_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_clk_wiz_0_0/HDMI_bd_clk_wiz_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_clk_wiz_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_proc_sys_reset_0_0/HDMI_bd_proc_sys_reset_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_proc_sys_reset_0_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_hdmi_rectangle_overl_0_0/HDMI_bd_hdmi_rectangle_overl_0_0.xci">
           <Proxy FileSetName="HDMI_bd_hdmi_rectangle_overl_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_speed_detection_0_0/HDMI_bd_speed_detection_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_speed_detection_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_digit_detection_0_0/HDMI_bd_digit_detection_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_digit_detection_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_dvi2rgb_0_0/HDMI_bd_dvi2rgb_0_0.xci">
           <Proxy FileSetName="HDMI_bd_dvi2rgb_0_0"/>
@@ -146,8 +143,11 @@
         <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_rgb2dvi_0_0/HDMI_bd_rgb2dvi_0_0.xci">
           <Proxy FileSetName="HDMI_bd_rgb2dvi_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_speed_detection_0_0/HDMI_bd_speed_detection_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_speed_detection_0_0"/>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_proc_sys_reset_0_0/HDMI_bd_proc_sys_reset_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_proc_sys_reset_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_clk_wiz_0_0/HDMI_bd_clk_wiz_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_clk_wiz_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/HDMI_bd/hdl/HDMI_bd_wrapper.vhd">

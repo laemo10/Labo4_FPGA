@@ -2,8 +2,8 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Wed Dec  3 21:51:34 2025
---Host        : pcetu-199 running 64-bit major release  (build 9200)
+--Date        : Thu Dec  4 10:46:15 2025
+--Host        : pcetu-129 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd.bd
 --Design      : HDMI_bd
 --Purpose     : IP block netlist
@@ -38,6 +38,7 @@ entity HDMI_bd is
     out4_0 : out STD_LOGIC;
     out5_0 : out STD_LOGIC;
     out6_0 : out STD_LOGIC;
+    out7_0 : out STD_LOGIC;
     reset : in STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
@@ -127,6 +128,18 @@ architecture STRUCTURE of HDMI_bd is
     rgb_out : out STD_LOGIC_VECTOR ( 23 downto 0 )
   );
   end component HDMI_bd_position_counter_0_0;
+  component HDMI_bd_digit_detection_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    h_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    v_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    pixel_valid : in STD_LOGIC;
+    new_frame : in STD_LOGIC;
+    rgb_in : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    seven_seg_out : out STD_LOGIC_VECTOR ( 7 downto 0 )
+  );
+  end component HDMI_bd_digit_detection_0_0;
   component HDMI_bd_hdmi_rectangle_overl_0_0 is
   port (
     clk : in STD_LOGIC;
@@ -145,31 +158,23 @@ architecture STRUCTURE of HDMI_bd is
   end component HDMI_bd_hdmi_rectangle_overl_0_0;
   component HDMI_bd_speed_detection_0_0 is
   port (
-    digit_in : in STD_LOGIC_VECTOR ( 6 downto 0 );
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    grid_in : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    speed_out : out STD_LOGIC_VECTOR ( 7 downto 0 );
     out0 : out STD_LOGIC;
     out1 : out STD_LOGIC;
     out2 : out STD_LOGIC;
     out3 : out STD_LOGIC;
     out4 : out STD_LOGIC;
     out5 : out STD_LOGIC;
-    out6 : out STD_LOGIC
+    out6 : out STD_LOGIC;
+    out7 : out STD_LOGIC
   );
   end component HDMI_bd_speed_detection_0_0;
-  component HDMI_bd_digit_detection_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    rst : in STD_LOGIC;
-    h_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    v_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    pixel_valid : in STD_LOGIC;
-    new_frame : in STD_LOGIC;
-    rgb_in : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    seven_seg_out : out STD_LOGIC_VECTOR ( 6 downto 0 )
-  );
-  end component HDMI_bd_digit_detection_0_0;
   signal CLK_1 : STD_LOGIC;
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
-  signal digit_detection_0_seven_seg_out : STD_LOGIC_VECTOR ( 6 downto 0 );
+  signal digit_detection_0_seven_seg_out : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal dvi2rgb_0_DDC_SCL_I : STD_LOGIC;
   signal dvi2rgb_0_DDC_SCL_O : STD_LOGIC;
   signal dvi2rgb_0_DDC_SCL_T : STD_LOGIC;
@@ -209,6 +214,7 @@ architecture STRUCTURE of HDMI_bd is
   signal speed_detection_0_out4 : STD_LOGIC;
   signal speed_detection_0_out5 : STD_LOGIC;
   signal speed_detection_0_out6 : STD_LOGIC;
+  signal speed_detection_0_out7 : STD_LOGIC;
   signal xlconstant_0_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_clk_wiz_0_locked_UNCONNECTED : STD_LOGIC;
   signal NLW_dvi2rgb_0_aPixelClkLckd_UNCONNECTED : STD_LOGIC;
@@ -216,6 +222,7 @@ architecture STRUCTURE of HDMI_bd is
   signal NLW_proc_sys_reset_0_bus_struct_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_proc_sys_reset_0_interconnect_aresetn_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_proc_sys_reset_0_peripheral_reset_UNCONNECTED : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal NLW_speed_detection_0_speed_out_UNCONNECTED : STD_LOGIC_VECTOR ( 7 downto 0 );
   attribute X_INTERFACE_INFO : string;
   attribute X_INTERFACE_INFO of CLK : signal is "xilinx.com:signal:clock:1.0 CLK.CLK CLK";
   attribute X_INTERFACE_PARAMETER : string;
@@ -261,6 +268,7 @@ begin
   out4_0 <= speed_detection_0_out4;
   out5_0 <= speed_detection_0_out5;
   out6_0 <= speed_detection_0_out6;
+  out7_0 <= speed_detection_0_out7;
   reset_1 <= reset;
 clk_wiz_0: component HDMI_bd_clk_wiz_0_0
      port map (
@@ -277,7 +285,7 @@ digit_detection_0: component HDMI_bd_digit_detection_0_0
       pixel_valid => position_counter_0_vde_out,
       rgb_in(23 downto 0) => position_counter_0_rgb_out(23 downto 0),
       rst => proc_sys_reset_0_peripheral_aresetn(0),
-      seven_seg_out(6 downto 0) => digit_detection_0_seven_seg_out(6 downto 0),
+      seven_seg_out(7 downto 0) => digit_detection_0_seven_seg_out(7 downto 0),
       v_count(31 downto 0) => position_counter_0_v_count(31 downto 0)
     );
 dvi2rgb_0: component HDMI_bd_dvi2rgb_0_0
@@ -360,14 +368,18 @@ rgb2dvi_0: component HDMI_bd_rgb2dvi_0_0
     );
 speed_detection_0: component HDMI_bd_speed_detection_0_0
      port map (
-      digit_in(6 downto 0) => digit_detection_0_seven_seg_out(6 downto 0),
+      clk => dvi2rgb_0_PixelClk,
+      grid_in(7 downto 0) => digit_detection_0_seven_seg_out(7 downto 0),
       out0 => speed_detection_0_out0,
       out1 => speed_detection_0_out1,
       out2 => speed_detection_0_out2,
       out3 => speed_detection_0_out3,
       out4 => speed_detection_0_out4,
       out5 => speed_detection_0_out5,
-      out6 => speed_detection_0_out6
+      out6 => speed_detection_0_out6,
+      out7 => speed_detection_0_out7,
+      rst => proc_sys_reset_0_peripheral_aresetn(0),
+      speed_out(7 downto 0) => NLW_speed_detection_0_speed_out_UNCONNECTED(7 downto 0)
     );
 xlconstant_0: component HDMI_bd_xlconstant_0_0
      port map (

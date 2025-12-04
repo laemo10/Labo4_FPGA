@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xE978DEB7A78C2491",
+      "boundary_crc": "0xA94BDCC93F9C6FA8",
       "device": "xc7z020clg400-1",
       "name": "HDMI_bd",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
@@ -16,9 +16,9 @@
       "xlconstant_0": "",
       "proc_sys_reset_0": "",
       "position_counter_0": "",
+      "digit_detection_0": "",
       "hdmi_rectangle_overl_0": "",
-      "speed_detection_0": "",
-      "digit_detection_0": ""
+      "speed_detection_0": ""
     },
     "interface_ports": {
       "hdmi_in": {
@@ -173,6 +173,9 @@
         "direction": "O"
       },
       "out6_0": {
+        "direction": "O"
+      },
+      "out7_0": {
         "direction": "O"
       }
     },
@@ -349,6 +352,69 @@
           }
         }
       },
+      "digit_detection_0": {
+        "vlnv": "xilinx.com:module_ref:digit_detection:1.0",
+        "xci_name": "HDMI_bd_digit_detection_0_0",
+        "xci_path": "ip\\HDMI_bd_digit_detection_0_0\\HDMI_bd_digit_detection_0_0.xci",
+        "inst_hier_path": "digit_detection_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "digit_detection",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "HDMI_bd_dvi2rgb_0_0_PixelClk",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_LOW",
+                "value_src": "const_prop"
+              }
+            }
+          },
+          "h_count": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "v_count": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "pixel_valid": {
+            "direction": "I"
+          },
+          "new_frame": {
+            "direction": "I"
+          },
+          "rgb_in": {
+            "direction": "I",
+            "left": "23",
+            "right": "0"
+          },
+          "seven_seg_out": {
+            "direction": "O",
+            "left": "7",
+            "right": "0"
+          }
+        }
+      },
       "hdmi_rectangle_overl_0": {
         "vlnv": "xilinx.com:module_ref:hdmi_rectangle_overlay:1.0",
         "xci_name": "HDMI_bd_hdmi_rectangle_overl_0_0",
@@ -435,45 +501,6 @@
           "boundary_crc": "0x0"
         },
         "ports": {
-          "digit_in": {
-            "direction": "I",
-            "left": "6",
-            "right": "0"
-          },
-          "out0": {
-            "direction": "O"
-          },
-          "out1": {
-            "direction": "O"
-          },
-          "out2": {
-            "direction": "O"
-          },
-          "out3": {
-            "direction": "O"
-          },
-          "out4": {
-            "direction": "O"
-          },
-          "out5": {
-            "direction": "O"
-          },
-          "out6": {
-            "direction": "O"
-          }
-        }
-      },
-      "digit_detection_0": {
-        "vlnv": "xilinx.com:module_ref:digit_detection:1.0",
-        "xci_name": "HDMI_bd_digit_detection_0_0",
-        "xci_path": "ip\\HDMI_bd_digit_detection_0_0\\HDMI_bd_digit_detection_0_0.xci",
-        "inst_hier_path": "digit_detection_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "digit_detection",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
           "clk": {
             "type": "clk",
             "direction": "I",
@@ -498,31 +525,39 @@
               }
             }
           },
-          "h_count": {
+          "grid_in": {
             "direction": "I",
-            "left": "31",
+            "left": "7",
             "right": "0"
           },
-          "v_count": {
-            "direction": "I",
-            "left": "31",
-            "right": "0"
-          },
-          "pixel_valid": {
-            "direction": "I"
-          },
-          "new_frame": {
-            "direction": "I"
-          },
-          "rgb_in": {
-            "direction": "I",
-            "left": "23",
-            "right": "0"
-          },
-          "seven_seg_out": {
+          "speed_out": {
             "direction": "O",
-            "left": "6",
+            "left": "7",
             "right": "0"
+          },
+          "out0": {
+            "direction": "O"
+          },
+          "out1": {
+            "direction": "O"
+          },
+          "out2": {
+            "direction": "O"
+          },
+          "out3": {
+            "direction": "O"
+          },
+          "out4": {
+            "direction": "O"
+          },
+          "out5": {
+            "direction": "O"
+          },
+          "out6": {
+            "direction": "O"
+          },
+          "out7": {
+            "direction": "O"
           }
         }
       }
@@ -563,7 +598,7 @@
       "digit_detection_0_seven_seg_out": {
         "ports": [
           "digit_detection_0/seven_seg_out",
-          "speed_detection_0/digit_in"
+          "speed_detection_0/grid_in"
         ]
       },
       "dvi2rgb_0_PixelClk": {
@@ -572,8 +607,9 @@
           "rgb2dvi_0/PixelClk",
           "proc_sys_reset_0/slowest_sync_clk",
           "position_counter_0/clk",
+          "digit_detection_0/clk",
           "hdmi_rectangle_overl_0/clk",
-          "digit_detection_0/clk"
+          "speed_detection_0/clk"
         ]
       },
       "dvi2rgb_0_vid_pData": {
@@ -633,8 +669,8 @@
       "position_counter_0_h_count": {
         "ports": [
           "position_counter_0/h_count",
-          "hdmi_rectangle_overl_0/h_count",
-          "digit_detection_0/h_count"
+          "digit_detection_0/h_count",
+          "hdmi_rectangle_overl_0/h_count"
         ]
       },
       "position_counter_0_hsync_out": {
@@ -646,37 +682,38 @@
       "position_counter_0_rgb_out": {
         "ports": [
           "position_counter_0/rgb_out",
-          "hdmi_rectangle_overl_0/rgb_in",
-          "digit_detection_0/rgb_in"
+          "digit_detection_0/rgb_in",
+          "hdmi_rectangle_overl_0/rgb_in"
         ]
       },
       "position_counter_0_v_count": {
         "ports": [
           "position_counter_0/v_count",
-          "hdmi_rectangle_overl_0/v_count",
-          "digit_detection_0/v_count"
+          "digit_detection_0/v_count",
+          "hdmi_rectangle_overl_0/v_count"
         ]
       },
       "position_counter_0_vde_out": {
         "ports": [
           "position_counter_0/vde_out",
-          "hdmi_rectangle_overl_0/vde_in",
-          "digit_detection_0/pixel_valid"
+          "digit_detection_0/pixel_valid",
+          "hdmi_rectangle_overl_0/vde_in"
         ]
       },
       "position_counter_0_vsync_out": {
         "ports": [
           "position_counter_0/vsync_out",
-          "hdmi_rectangle_overl_0/vsync_in",
-          "digit_detection_0/new_frame"
+          "digit_detection_0/new_frame",
+          "hdmi_rectangle_overl_0/vsync_in"
         ]
       },
       "proc_sys_reset_0_peripheral_aresetn": {
         "ports": [
           "proc_sys_reset_0/peripheral_aresetn",
           "position_counter_0/rst",
+          "digit_detection_0/rst",
           "hdmi_rectangle_overl_0/rst",
-          "digit_detection_0/rst"
+          "speed_detection_0/rst"
         ]
       },
       "reset_1": {
@@ -728,6 +765,12 @@
         "ports": [
           "speed_detection_0/out6",
           "out6_0"
+        ]
+      },
+      "speed_detection_0_out7": {
+        "ports": [
+          "speed_detection_0/out7",
+          "out7_0"
         ]
       },
       "xlconstant_0_dout": {

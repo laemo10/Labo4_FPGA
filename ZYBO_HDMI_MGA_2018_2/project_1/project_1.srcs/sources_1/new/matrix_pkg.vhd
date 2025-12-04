@@ -104,6 +104,11 @@ package matrix_pkg is
     constant CELL_7_P_2_V  : integer := RECT_LEFT + 166;
     constant CELL_7_P_3_H  : integer := RECT_TOP + 558;
     constant CELL_7_P_3_V  : integer := RECT_LEFT + 166;
+    
+    constant CELL_0_P_1_H  : integer := RECT_TOP + 380;     -- Used to see if vitess is valid
+    constant CELL_0_P_1_V  : integer := RECT_LEFT + 166;    -- Used to see if vitess is valid
+    constant CELL_0_P_2_H  : integer := RECT_TOP + 493;     -- Used to see if vitess is valid
+    constant CELL_0_P_2_V  : integer := RECT_LEFT + 166;    -- Used to see if vitess is valid
 
     
     -- Total bits for the flattened output

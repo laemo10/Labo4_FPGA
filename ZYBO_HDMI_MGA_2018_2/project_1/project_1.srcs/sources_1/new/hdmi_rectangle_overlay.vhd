@@ -28,6 +28,16 @@ architecture Behavioral of hdmi_rectangle_overlay is
     -- unsigned counters
     signal h_count_u : unsigned(31 downto 0) := (others => '0');
     signal v_count_u : unsigned(31 downto 0) := (others => '0');
+    
+     -- rgb vector
+    alias r_in : std_logic_vector(7 downto 0) is rgb_in(23 downto 16);
+    alias g_in : std_logic_vector(7 downto 0) is rgb_in(15 downto 8);
+    alias b_in : std_logic_vector(7 downto 0) is rgb_in(7 downto 0);
+    signal w_sum : unsigned(15 downto 0) := (others => '0');
+    signal gray_scale : unsigned(7 downto 0) := (others => '0');
+    signal is_black, is_black_reg : std_logic := '0';
+    
+    constant threshold : unsigned(7 downto 0) :=  x"66";
 
     -- sync previous samples for edge detection
     signal hsync_prev : std_logic := '0';
@@ -139,6 +149,20 @@ begin
     
     probe_cell : process(h_count_u, v_count_u)
     begin
+    
+        -- Calculate gray scale
+        w_sum <= (unsigned(r_in) * 77) + 
+                 (unsigned(g_in) * 150) + 
+                 (unsigned(b_in) * 29);
+        gray_scale <= unsigned(w_sum(15 downto 8));
+        
+        -- Find wether it is black or white
+        if gray_scale > threshold then
+            is_black <= '0';
+        else
+            is_black <= '1';
+        end if;
+    
         -- Cell 1
         if  (v_count_u = CELL_1_P_1_H and h_count_u = CELL_1_P_1_V ) or
             (v_count_u = CELL_1_P_2_H and h_count_u = CELL_1_P_2_V ) or
@@ -193,6 +217,7 @@ begin
                 is_edge_reg         <= '0';
                 is_logic_grid_reg   <= '0';
                 is_probe_reg        <= '0';
+                is_black_reg        <= '0';
             else
                 vde_reg             <= vde_in;
                 hsync_reg           <= hsync_in;
@@ -201,6 +226,7 @@ begin
                 is_edge_reg         <= is_edge;
                 is_logic_grid_reg   <= is_logic_grid;
                 is_probe_reg        <= is_probe;
+                is_black_reg        <= is_black;
             end if;
         end if;
     end process;
@@ -228,7 +254,11 @@ begin
                 elsif (is_logic_grid_reg = '1') and (vde_reg = '1') then
                     rgb_out <= GREEN_COLOR;
                 elsif (is_probe_reg = '1') and (vde_reg = '1') then
-                    rgb_out <= WHITE_COLOR;
+                    if (is_black_reg = '1') then
+                        rgb_out <= RED_COLOR;
+                    else 
+                        rgb_out <= WHITE_COLOR;
+                    end if;
                 else
                     rgb_out <= rgb_reg;
                 end if;

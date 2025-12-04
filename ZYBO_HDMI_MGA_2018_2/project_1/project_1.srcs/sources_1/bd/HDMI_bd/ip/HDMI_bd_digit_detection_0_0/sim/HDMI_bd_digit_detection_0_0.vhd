@@ -62,7 +62,7 @@ ENTITY HDMI_bd_digit_detection_0_0 IS
     pixel_valid : IN STD_LOGIC;
     new_frame : IN STD_LOGIC;
     rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    seven_seg_out : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+    seven_seg_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
   );
 END HDMI_bd_digit_detection_0_0;
 
@@ -78,7 +78,7 @@ ARCHITECTURE HDMI_bd_digit_detection_0_0_arch OF HDMI_bd_digit_detection_0_0 IS
       pixel_valid : IN STD_LOGIC;
       new_frame : IN STD_LOGIC;
       rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-      seven_seg_out : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+      seven_seg_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
   END COMPONENT digit_detection;
   ATTRIBUTE X_INTERFACE_INFO : STRING;

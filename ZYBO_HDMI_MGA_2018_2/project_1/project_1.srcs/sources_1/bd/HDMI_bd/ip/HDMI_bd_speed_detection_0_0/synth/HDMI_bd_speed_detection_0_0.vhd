@@ -55,14 +55,18 @@ USE ieee.numeric_std.ALL;
 
 ENTITY HDMI_bd_speed_detection_0_0 IS
   PORT (
-    digit_in : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+    clk : IN STD_LOGIC;
+    rst : IN STD_LOGIC;
+    grid_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    speed_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
     out0 : OUT STD_LOGIC;
     out1 : OUT STD_LOGIC;
     out2 : OUT STD_LOGIC;
     out3 : OUT STD_LOGIC;
     out4 : OUT STD_LOGIC;
     out5 : OUT STD_LOGIC;
-    out6 : OUT STD_LOGIC
+    out6 : OUT STD_LOGIC;
+    out7 : OUT STD_LOGIC
   );
 END HDMI_bd_speed_detection_0_0;
 
@@ -71,14 +75,18 @@ ARCHITECTURE HDMI_bd_speed_detection_0_0_arch OF HDMI_bd_speed_detection_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_speed_detection_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT speed_detection IS
     PORT (
-      digit_in : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+      clk : IN STD_LOGIC;
+      rst : IN STD_LOGIC;
+      grid_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      speed_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
       out0 : OUT STD_LOGIC;
       out1 : OUT STD_LOGIC;
       out2 : OUT STD_LOGIC;
       out3 : OUT STD_LOGIC;
       out4 : OUT STD_LOGIC;
       out5 : OUT STD_LOGIC;
-      out6 : OUT STD_LOGIC
+      out6 : OUT STD_LOGIC;
+      out7 : OUT STD_LOGIC
     );
   END COMPONENT speed_detection;
   ATTRIBUTE X_CORE_INFO : STRING;
@@ -89,16 +97,26 @@ ARCHITECTURE HDMI_bd_speed_detection_0_0_arch OF HDMI_bd_speed_detection_0_0 IS
   ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_speed_detection_0_0_arch: ARCHITECTURE IS "HDMI_bd_speed_detection_0_0,speed_detection,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=speed_detection,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
   ATTRIBUTE IP_DEFINITION_SOURCE OF HDMI_bd_speed_detection_0_0_arch: ARCHITECTURE IS "module_ref";
+  ATTRIBUTE X_INTERFACE_INFO : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN HDMI_bd_dvi2rgb_0_0_PixelClk, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF rst: SIGNAL IS "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
 BEGIN
   U0 : speed_detection
     PORT MAP (
-      digit_in => digit_in,
+      clk => clk,
+      rst => rst,
+      grid_in => grid_in,
+      speed_out => speed_out,
       out0 => out0,
       out1 => out1,
       out2 => out2,
       out3 => out3,
       out4 => out4,
       out5 => out5,
-      out6 => out6
+      out6 => out6,
+      out7 => out7
     );
 END HDMI_bd_speed_detection_0_0_arch;

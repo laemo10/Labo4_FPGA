@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Dec  3 21:51:34 2025" VIVADOVERSION="2023.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Dec  4 10:46:15 2025" VIVADOVERSION="2023.1">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z020" NAME="HDMI_bd" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -130,6 +130,11 @@
     <PORT DIR="O" NAME="out6_0" SIGIS="undef" SIGNAME="speed_detection_0_out6">
       <CONNECTIONS>
         <CONNECTION INSTANCE="speed_detection_0" PORT="out6"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" NAME="out7_0" SIGIS="undef" SIGNAME="speed_detection_0_out7">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="speed_detection_0" PORT="out7"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -805,9 +810,9 @@
             <CONNECTION INSTANCE="position_counter_0" PORT="rgb_out"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="6" NAME="seven_seg_out" RIGHT="0" SIGIS="undef" SIGNAME="digit_detection_0_seven_seg_out">
+        <PORT DIR="O" LEFT="7" NAME="seven_seg_out" RIGHT="0" SIGIS="undef" SIGNAME="digit_detection_0_seven_seg_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="speed_detection_0" PORT="digit_in"/>
+            <CONNECTION INSTANCE="speed_detection_0" PORT="grid_in"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -887,8 +892,9 @@
             <CONNECTION INSTANCE="rgb2dvi_0" PORT="PixelClk"/>
             <CONNECTION INSTANCE="proc_sys_reset_0" PORT="slowest_sync_clk"/>
             <CONNECTION INSTANCE="position_counter_0" PORT="clk"/>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="clk"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="clk"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="clk"/>
+            <CONNECTION INSTANCE="speed_detection_0" PORT="clk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="aPixelClkLckd" SIGIS="undef"/>
@@ -1068,8 +1074,8 @@
         </PORT>
         <PORT DIR="O" NAME="vde_out" SIGIS="undef" SIGNAME="position_counter_0_vde_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="vde_in"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="pixel_valid"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="vde_in"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="hsync_out" SIGIS="undef" SIGNAME="position_counter_0_hsync_out">
@@ -1079,26 +1085,26 @@
         </PORT>
         <PORT DIR="O" NAME="vsync_out" SIGIS="undef" SIGNAME="position_counter_0_vsync_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="vsync_in"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="new_frame"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="vsync_in"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="31" NAME="h_count" RIGHT="0" SIGIS="undef" SIGNAME="position_counter_0_h_count">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="h_count"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="h_count"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="h_count"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="31" NAME="v_count" RIGHT="0" SIGIS="undef" SIGNAME="position_counter_0_v_count">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="v_count"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="v_count"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="v_count"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="23" NAME="rgb_out" RIGHT="0" SIGIS="undef" SIGNAME="position_counter_0_rgb_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="rgb_in"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="rgb_in"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="rgb_in"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1144,8 +1150,9 @@
         <PORT DIR="O" LEFT="0" NAME="peripheral_aresetn" POLARITY="ACTIVE_LOW" RIGHT="0" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
           <CONNECTIONS>
             <CONNECTION INSTANCE="position_counter_0" PORT="rst"/>
-            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="rst"/>
             <CONNECTION INSTANCE="digit_detection_0" PORT="rst"/>
+            <CONNECTION INSTANCE="hdmi_rectangle_overl_0" PORT="rst"/>
+            <CONNECTION INSTANCE="speed_detection_0" PORT="rst"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -1246,11 +1253,22 @@
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" LEFT="6" NAME="digit_in" RIGHT="0" SIGIS="undef" SIGNAME="digit_detection_0_seven_seg_out">
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="dvi2rgb_0_PixelClk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="dvi2rgb_0" PORT="PixelClk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="rst" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="proc_sys_reset_0_peripheral_aresetn">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="proc_sys_reset_0" PORT="peripheral_aresetn"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="7" NAME="grid_in" RIGHT="0" SIGIS="undef" SIGNAME="digit_detection_0_seven_seg_out">
           <CONNECTIONS>
             <CONNECTION INSTANCE="digit_detection_0" PORT="seven_seg_out"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" LEFT="7" NAME="speed_out" RIGHT="0" SIGIS="undef"/>
         <PORT DIR="O" NAME="out0" SIGIS="undef" SIGNAME="speed_detection_0_out0">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="out0_0"/>
@@ -1284,6 +1302,11 @@
         <PORT DIR="O" NAME="out6" SIGIS="undef" SIGNAME="speed_detection_0_out6">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="out6_0"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="out7" SIGIS="undef" SIGNAME="speed_detection_0_out7">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="out7_0"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
