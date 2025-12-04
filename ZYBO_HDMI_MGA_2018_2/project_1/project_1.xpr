@@ -104,6 +104,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/new/digit_detection.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/hdmi_rectangle_overlay.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -116,7 +122,19 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/digit_detection.vhd">
+      <File Path="$PSRCDIR/sources_1/new/comparateur_regulateur_vitesse.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/gen_vitesse.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/system_regulation_vitesse.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -128,17 +146,20 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_hdmi_rectangle_overl_0_0/HDMI_bd_hdmi_rectangle_overl_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_hdmi_rectangle_overl_0_0"/>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_systeme_regulation_v_0_0/HDMI_bd_systeme_regulation_v_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_systeme_regulation_v_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_speed_detection_0_0/HDMI_bd_speed_detection_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_speed_detection_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_digit_detection_0_0/HDMI_bd_digit_detection_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_digit_detection_0_0"/>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_position_counter_0_0/HDMI_bd_position_counter_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_position_counter_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_dvi2rgb_0_0/HDMI_bd_dvi2rgb_0_0.xci">
           <Proxy FileSetName="HDMI_bd_dvi2rgb_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_hdmi_rectangle_overl_0_0/HDMI_bd_hdmi_rectangle_overl_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_hdmi_rectangle_overl_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_clk_wiz_0_0/HDMI_bd_clk_wiz_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_clk_wiz_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_rgb2dvi_0_0/HDMI_bd_rgb2dvi_0_0.xci">
           <Proxy FileSetName="HDMI_bd_rgb2dvi_0_0"/>
@@ -146,8 +167,11 @@
         <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_proc_sys_reset_0_0/HDMI_bd_proc_sys_reset_0_0.xci">
           <Proxy FileSetName="HDMI_bd_proc_sys_reset_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_clk_wiz_0_0/HDMI_bd_clk_wiz_0_0.xci">
-          <Proxy FileSetName="HDMI_bd_clk_wiz_0_0"/>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_digit_detection_0_0/HDMI_bd_digit_detection_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_digit_detection_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="HDMI_bd.bd" FileRelPathName="ip/HDMI_bd_speed_detection_0_0/HDMI_bd_speed_detection_0_0.xci">
+          <Proxy FileSetName="HDMI_bd_speed_detection_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/HDMI_bd/hdl/HDMI_bd_wrapper.vhd">
@@ -238,15 +262,27 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="HDMI_bd_speed_detection_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/HDMI_bd_speed_detection_0_0" RelGenDir="$PGENDIR/HDMI_bd_speed_detection_0_0">
+    <FileSet Name="HDMI_bd_position_counter_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/HDMI_bd_position_counter_0_0" RelGenDir="$PGENDIR/HDMI_bd_position_counter_0_0">
       <Config>
-        <Option Name="TopModule" Val="HDMI_bd_speed_detection_0_0"/>
+        <Option Name="TopModule" Val="HDMI_bd_position_counter_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
     <FileSet Name="HDMI_bd_digit_detection_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/HDMI_bd_digit_detection_0_0" RelGenDir="$PGENDIR/HDMI_bd_digit_detection_0_0">
       <Config>
         <Option Name="TopModule" Val="HDMI_bd_digit_detection_0_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="HDMI_bd_systeme_regulation_v_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/HDMI_bd_systeme_regulation_v_0_0" RelGenDir="$PGENDIR/HDMI_bd_systeme_regulation_v_0_0">
+      <Config>
+        <Option Name="TopModule" Val="HDMI_bd_systeme_regulation_v_0_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="HDMI_bd_speed_detection_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/HDMI_bd_speed_detection_0_0" RelGenDir="$PGENDIR/HDMI_bd_speed_detection_0_0">
+      <Config>
+        <Option Name="TopModule" Val="HDMI_bd_speed_detection_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -322,9 +358,7 @@
     </Run>
     <Run Id="HDMI_bd_hdmi_rectangle_overl_0_0_synth_1" Type="Ft3:Synth" SrcSet="HDMI_bd_hdmi_rectangle_overl_0_0" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_hdmi_rectangle_overl_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/HDMI_bd_hdmi_rectangle_overl_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_hdmi_rectangle_overl_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_hdmi_rectangle_overl_0_0_synth_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -332,7 +366,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="HDMI_bd_speed_detection_0_0_synth_1" Type="Ft3:Synth" SrcSet="HDMI_bd_speed_detection_0_0" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_speed_detection_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/HDMI_bd_speed_detection_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_synth_1">
+    <Run Id="HDMI_bd_position_counter_0_0_synth_1" Type="Ft3:Synth" SrcSet="HDMI_bd_position_counter_0_0" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_position_counter_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/HDMI_bd_position_counter_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_position_counter_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_position_counter_0_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -345,6 +379,30 @@
       <RQSFiles/>
     </Run>
     <Run Id="HDMI_bd_digit_detection_0_0_synth_1" Type="Ft3:Synth" SrcSet="HDMI_bd_digit_detection_0_0" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_digit_detection_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/HDMI_bd_digit_detection_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_digit_detection_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_digit_detection_0_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="HDMI_bd_systeme_regulation_v_0_0_synth_1" Type="Ft3:Synth" SrcSet="HDMI_bd_systeme_regulation_v_0_0" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_systeme_regulation_v_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/HDMI_bd_systeme_regulation_v_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_systeme_regulation_v_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_systeme_regulation_v_0_0_synth_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
+          <Desc>Vivado Synthesis Defaults</Desc>
+        </StratHandle>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="HDMI_bd_speed_detection_0_0_synth_1" Type="Ft3:Synth" SrcSet="HDMI_bd_speed_detection_0_0" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_speed_detection_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/HDMI_bd_speed_detection_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -444,9 +502,7 @@
     </Run>
     <Run Id="HDMI_bd_hdmi_rectangle_overl_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_hdmi_rectangle_overl_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="HDMI_bd_hdmi_rectangle_overl_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_hdmi_rectangle_overl_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_hdmi_rectangle_overl_0_0_impl_1">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -461,7 +517,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="HDMI_bd_speed_detection_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_speed_detection_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="HDMI_bd_speed_detection_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_impl_1">
+    <Run Id="HDMI_bd_position_counter_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_position_counter_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="HDMI_bd_position_counter_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_position_counter_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_position_counter_0_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
           <Desc>Default settings for Implementation.</Desc>
@@ -481,6 +537,44 @@
       <RQSFiles/>
     </Run>
     <Run Id="HDMI_bd_digit_detection_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_digit_detection_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="HDMI_bd_digit_detection_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_digit_detection_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_digit_detection_0_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="HDMI_bd_systeme_regulation_v_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_systeme_regulation_v_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="HDMI_bd_systeme_regulation_v_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_systeme_regulation_v_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_systeme_regulation_v_0_0_impl_1">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
+          <Desc>Default settings for Implementation.</Desc>
+        </StratHandle>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2023"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="HDMI_bd_speed_detection_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="HDMI_bd_speed_detection_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="HDMI_bd_speed_detection_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/HDMI_bd_speed_detection_0_0_impl_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
           <Desc>Default settings for Implementation.</Desc>

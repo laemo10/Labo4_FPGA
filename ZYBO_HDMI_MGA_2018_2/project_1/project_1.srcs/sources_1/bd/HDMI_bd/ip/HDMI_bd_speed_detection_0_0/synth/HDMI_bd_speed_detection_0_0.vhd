@@ -59,14 +59,7 @@ ENTITY HDMI_bd_speed_detection_0_0 IS
     rst : IN STD_LOGIC;
     grid_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     speed_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-    out0 : OUT STD_LOGIC;
-    out1 : OUT STD_LOGIC;
-    out2 : OUT STD_LOGIC;
-    out3 : OUT STD_LOGIC;
-    out4 : OUT STD_LOGIC;
-    out5 : OUT STD_LOGIC;
-    out6 : OUT STD_LOGIC;
-    out7 : OUT STD_LOGIC
+    speed_valid : OUT STD_LOGIC
   );
 END HDMI_bd_speed_detection_0_0;
 
@@ -79,14 +72,7 @@ ARCHITECTURE HDMI_bd_speed_detection_0_0_arch OF HDMI_bd_speed_detection_0_0 IS
       rst : IN STD_LOGIC;
       grid_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
       speed_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-      out0 : OUT STD_LOGIC;
-      out1 : OUT STD_LOGIC;
-      out2 : OUT STD_LOGIC;
-      out3 : OUT STD_LOGIC;
-      out4 : OUT STD_LOGIC;
-      out5 : OUT STD_LOGIC;
-      out6 : OUT STD_LOGIC;
-      out7 : OUT STD_LOGIC
+      speed_valid : OUT STD_LOGIC
     );
   END COMPONENT speed_detection;
   ATTRIBUTE X_CORE_INFO : STRING;
@@ -110,13 +96,6 @@ BEGIN
       rst => rst,
       grid_in => grid_in,
       speed_out => speed_out,
-      out0 => out0,
-      out1 => out1,
-      out2 => out2,
-      out3 => out3,
-      out4 => out4,
-      out5 => out5,
-      out6 => out6,
-      out7 => out7
+      speed_valid => speed_valid
     );
 END HDMI_bd_speed_detection_0_0_arch;
