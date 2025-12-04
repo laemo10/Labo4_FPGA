@@ -4,8 +4,8 @@
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
 -- Date        : Wed Nov 26 20:07:37 2025
 -- Host        : pcetu-139 running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_proc_sys_reset_0_0/HDMI_bd_proc_sys_reset_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top HDMI_bd_proc_sys_reset_0_0 -prefix
+--               HDMI_bd_proc_sys_reset_0_0_ HDMI_bd_proc_sys_reset_0_0_sim_netlist.vhdl
 -- Design      : HDMI_bd_proc_sys_reset_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -27,8 +27,6 @@ entity HDMI_bd_proc_sys_reset_0_0_cdc_sync is
     mb_debug_sys_rst : in STD_LOGIC;
     slowest_sync_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_proc_sys_reset_0_0_cdc_sync : entity is "cdc_sync";
 end HDMI_bd_proc_sys_reset_0_0_cdc_sync;
 
 architecture STRUCTURE of HDMI_bd_proc_sys_reset_0_0_cdc_sync is
@@ -248,8 +246,6 @@ entity HDMI_bd_proc_sys_reset_0_0_upcnt_n is
     seq_cnt_en : in STD_LOGIC;
     slowest_sync_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_proc_sys_reset_0_0_upcnt_n : entity is "upcnt_n";
 end HDMI_bd_proc_sys_reset_0_0_upcnt_n;
 
 architecture STRUCTURE of HDMI_bd_proc_sys_reset_0_0_upcnt_n is
@@ -414,8 +410,6 @@ entity HDMI_bd_proc_sys_reset_0_0_lpf is
     mb_debug_sys_rst : in STD_LOGIC;
     aux_reset_in : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_proc_sys_reset_0_0_lpf : entity is "lpf";
 end HDMI_bd_proc_sys_reset_0_0_lpf;
 
 architecture STRUCTURE of HDMI_bd_proc_sys_reset_0_0_lpf is
@@ -604,8 +598,6 @@ entity HDMI_bd_proc_sys_reset_0_0_sequence_psr is
     lpf_int : in STD_LOGIC;
     slowest_sync_clk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_proc_sys_reset_0_0_sequence_psr : entity is "sequence_psr";
 end HDMI_bd_proc_sys_reset_0_0_sequence_psr;
 
 architecture STRUCTURE of HDMI_bd_proc_sys_reset_0_0_sequence_psr is
@@ -944,8 +936,6 @@ entity HDMI_bd_proc_sys_reset_0_0_proc_sys_reset is
   attribute C_NUM_PERP_ARESETN of HDMI_bd_proc_sys_reset_0_0_proc_sys_reset : entity is 1;
   attribute C_NUM_PERP_RST : integer;
   attribute C_NUM_PERP_RST of HDMI_bd_proc_sys_reset_0_0_proc_sys_reset : entity is 1;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_proc_sys_reset_0_0_proc_sys_reset : entity is "proc_sys_reset";
 end HDMI_bd_proc_sys_reset_0_0_proc_sys_reset;
 
 architecture STRUCTURE of HDMI_bd_proc_sys_reset_0_0_proc_sys_reset is

@@ -2,8 +2,8 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Fri Nov 28 00:50:44 2025
---Host        : pcetu-139 running 64-bit major release  (build 9200)
+--Date        : Thu Dec  4 10:46:15 2025
+--Host        : pcetu-129 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd_wrapper.bd
 --Design      : HDMI_bd_wrapper
 --Purpose     : IP block netlist
@@ -34,6 +34,7 @@ entity HDMI_bd_wrapper is
     out4_0 : out STD_LOGIC;
     out5_0 : out STD_LOGIC;
     out6_0 : out STD_LOGIC;
+    out7_0 : out STD_LOGIC;
     reset : in STD_LOGIC
   );
 end HDMI_bd_wrapper;
@@ -65,7 +66,8 @@ architecture STRUCTURE of HDMI_bd_wrapper is
     out3_0 : out STD_LOGIC;
     out4_0 : out STD_LOGIC;
     out5_0 : out STD_LOGIC;
-    out6_0 : out STD_LOGIC
+    out6_0 : out STD_LOGIC;
+    out7_0 : out STD_LOGIC
   );
   end component HDMI_bd;
   component IOBUF is
@@ -109,6 +111,7 @@ HDMI_bd_i: component HDMI_bd
       out4_0 => out4_0,
       out5_0 => out5_0,
       out6_0 => out6_0,
+      out7_0 => out7_0,
       reset => reset
     );
 hdmi_in_ddc_scl_iobuf: component IOBUF

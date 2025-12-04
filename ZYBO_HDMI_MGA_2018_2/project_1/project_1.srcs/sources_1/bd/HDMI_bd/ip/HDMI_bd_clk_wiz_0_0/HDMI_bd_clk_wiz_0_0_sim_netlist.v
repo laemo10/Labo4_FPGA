@@ -2,10 +2,10 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-// Date        : Thu Nov 20 08:41:03 2025
+// Date        : Thu Nov 20 08:41:02 2025
 // Host        : pcetu-139 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_clk_wiz_0_0/HDMI_bd_clk_wiz_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top HDMI_bd_clk_wiz_0_0 -prefix
+//               HDMI_bd_clk_wiz_0_0_ HDMI_bd_clk_wiz_0_0_sim_netlist.v
 // Design      : HDMI_bd_clk_wiz_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -29,14 +29,14 @@ module HDMI_bd_clk_wiz_0_0
   wire locked;
   wire reset;
 
-  HDMI_bd_clk_wiz_0_0_clk_wiz inst
+  HDMI_bd_clk_wiz_0_0_HDMI_bd_clk_wiz_0_0_clk_wiz inst
        (.clk_in1(clk_in1),
         .clk_out1(clk_out1),
         .locked(locked),
         .reset(reset));
 endmodule
 
-module HDMI_bd_clk_wiz_0_0_clk_wiz
+module HDMI_bd_clk_wiz_0_0_HDMI_bd_clk_wiz_0_0_clk_wiz
    (clk_out1,
     reset,
     locked,

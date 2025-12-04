@@ -4,8 +4,8 @@
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
 -- Date        : Thu Nov 20 08:41:07 2025
 -- Host        : pcetu-139 running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_dvi2rgb_0_0/HDMI_bd_dvi2rgb_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top HDMI_bd_dvi2rgb_0_0 -prefix
+--               HDMI_bd_dvi2rgb_0_0_ HDMI_bd_dvi2rgb_0_0_sim_netlist.vhdl
 -- Design      : HDMI_bd_dvi2rgb_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -28,8 +28,6 @@ entity HDMI_bd_dvi2rgb_0_0_ChannelBond is
     pAllVld : in STD_LOGIC;
     pDataInRaw : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_ChannelBond : entity is "ChannelBond";
 end HDMI_bd_dvi2rgb_0_0_ChannelBond;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_ChannelBond is
@@ -2275,8 +2273,6 @@ entity HDMI_bd_dvi2rgb_0_0_GlitchFilter is
     RefClk : in STD_LOGIC;
     SS : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_GlitchFilter : entity is "GlitchFilter";
 end HDMI_bd_dvi2rgb_0_0_GlitchFilter;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_GlitchFilter is
@@ -2596,8 +2592,6 @@ entity HDMI_bd_dvi2rgb_0_0_InputSERDES is
     CLKB : in STD_LOGIC;
     \out\ : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_InputSERDES : entity is "InputSERDES";
 end HDMI_bd_dvi2rgb_0_0_InputSERDES;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_InputSERDES is
@@ -3204,8 +3198,6 @@ entity HDMI_bd_dvi2rgb_0_0_PhaseAlign is
     D : in STD_LOGIC_VECTOR ( 8 downto 0 );
     \pIDLY_CNT_Q_reg[4]_0\ : in STD_LOGIC_VECTOR ( 4 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_PhaseAlign : entity is "PhaseAlign";
 end HDMI_bd_dvi2rgb_0_0_PhaseAlign;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_PhaseAlign is
@@ -7827,8 +7819,6 @@ entity HDMI_bd_dvi2rgb_0_0_ResyncToBUFG is
     poVSync_reg_0 : in STD_LOGIC;
     D : in STD_LOGIC_VECTOR ( 23 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_ResyncToBUFG : entity is "ResyncToBUFG";
 end HDMI_bd_dvi2rgb_0_0_ResyncToBUFG;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_ResyncToBUFG is
@@ -8069,8 +8059,6 @@ entity HDMI_bd_dvi2rgb_0_0_SyncAsync is
     RefClk : in STD_LOGIC;
     AS : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_SyncAsync : entity is "SyncAsync";
 end HDMI_bd_dvi2rgb_0_0_SyncAsync;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_SyncAsync is
@@ -8706,8 +8694,6 @@ entity HDMI_bd_dvi2rgb_0_0_ResetBridge is
     in0 : in STD_LOGIC;
     \oSyncStages_reg[1]\ : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_ResetBridge : entity is "ResetBridge";
 end HDMI_bd_dvi2rgb_0_0_ResetBridge;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_ResetBridge is
@@ -8798,8 +8784,6 @@ entity HDMI_bd_dvi2rgb_0_0_SyncBase is
     rTimeoutCnt_reg : in STD_LOGIC_VECTOR ( 23 downto 0 );
     CLK : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_SyncBase : entity is "SyncBase";
 end HDMI_bd_dvi2rgb_0_0_SyncBase;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_SyncBase is
@@ -9264,8 +9248,6 @@ entity HDMI_bd_dvi2rgb_0_0_TWI_SlaveCtl is
     SDA_I : in STD_LOGIC;
     SCL_I : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_TWI_SlaveCtl : entity is "TWI_SlaveCtl";
 end HDMI_bd_dvi2rgb_0_0_TWI_SlaveCtl;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_TWI_SlaveCtl is
@@ -10236,8 +10218,6 @@ entity HDMI_bd_dvi2rgb_0_0_EEPROM_8b is
     SDA_I : in STD_LOGIC;
     SCL_I : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_EEPROM_8b : entity is "EEPROM_8b";
 end HDMI_bd_dvi2rgb_0_0_EEPROM_8b;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_EEPROM_8b is
@@ -11177,8 +11157,6 @@ entity HDMI_bd_dvi2rgb_0_0_TMDS_Clocking is
     TMDS_Clk_p : in STD_LOGIC;
     TMDS_Clk_n : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_TMDS_Clocking : entity is "TMDS_Clocking";
 end HDMI_bd_dvi2rgb_0_0_TMDS_Clocking;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_TMDS_Clocking is
@@ -11619,8 +11597,6 @@ entity HDMI_bd_dvi2rgb_0_0_TMDS_Decoder is
     pRdy_2 : in STD_LOGIC;
     pRst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_TMDS_Decoder : entity is "TMDS_Decoder";
 end HDMI_bd_dvi2rgb_0_0_TMDS_Decoder;
 
 architecture STRUCTURE of HDMI_bd_dvi2rgb_0_0_TMDS_Decoder is
@@ -13802,8 +13778,6 @@ entity HDMI_bd_dvi2rgb_0_0_dvi2rgb is
     pRst : in STD_LOGIC;
     pRst_n : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_dvi2rgb_0_0_dvi2rgb : entity is "dvi2rgb";
   attribute kAddBUFG : string;
   attribute kAddBUFG of HDMI_bd_dvi2rgb_0_0_dvi2rgb : entity is "TRUE";
   attribute kClkRange : integer;

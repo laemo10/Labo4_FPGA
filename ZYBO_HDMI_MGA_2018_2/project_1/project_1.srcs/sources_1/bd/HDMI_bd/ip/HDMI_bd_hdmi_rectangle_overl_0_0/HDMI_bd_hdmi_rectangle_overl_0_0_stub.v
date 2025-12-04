@@ -2,8 +2,8 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-// Date        : Thu Nov 27 20:31:49 2025
-// Host        : pcetu-189 running 64-bit major release  (build 9200)
+// Date        : Thu Dec  4 10:46:53 2025
+// Host        : pcetu-129 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
 //               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_hdmi_rectangle_overl_0_0/HDMI_bd_hdmi_rectangle_overl_0_0_stub.v
 // Design      : HDMI_bd_hdmi_rectangle_overl_0_0
@@ -15,12 +15,14 @@
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
 (* x_core_info = "hdmi_rectangle_overlay,Vivado 2023.1" *)
-module HDMI_bd_hdmi_rectangle_overl_0_0(clk, rst, vde_in, hsync_in, vsync_in, rgb_in, 
-  vde_out, hsync_out, vsync_out, rgb_out)
-/* synthesis syn_black_box black_box_pad_pin="rst,vde_in,hsync_in,vsync_in,rgb_in[23:0],vde_out,hsync_out,vsync_out,rgb_out[23:0]" */
+module HDMI_bd_hdmi_rectangle_overl_0_0(clk, rst, h_count, v_count, vde_in, hsync_in, 
+  vsync_in, rgb_in, vde_out, hsync_out, vsync_out, rgb_out)
+/* synthesis syn_black_box black_box_pad_pin="rst,h_count[31:0],v_count[31:0],vde_in,hsync_in,vsync_in,rgb_in[23:0],vde_out,hsync_out,vsync_out,rgb_out[23:0]" */
 /* synthesis syn_force_seq_prim="clk" */;
   input clk /* synthesis syn_isclock = 1 */;
   input rst;
+  input [31:0]h_count;
+  input [31:0]v_count;
   input vde_in;
   input hsync_in;
   input vsync_in;
