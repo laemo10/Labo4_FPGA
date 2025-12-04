@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
--- Date        : Sat Nov 29 15:02:11 2025
--- Host        : pcetu-183 running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim -rename_top HDMI_bd_position_counter_0_0 -prefix
---               HDMI_bd_position_counter_0_0_ HDMI_bd_position_counter_0_0_sim_netlist.vhdl
+-- Date        : Thu Dec  4 11:07:05 2025
+-- Host        : pcetu-129 running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode funcsim
+--               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_position_counter_0_0/HDMI_bd_position_counter_0_0_sim_netlist.vhdl
 -- Design      : HDMI_bd_position_counter_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -30,6 +30,8 @@ entity HDMI_bd_position_counter_0_0_position_counter is
     vsync_in : in STD_LOGIC;
     rgb_in : in STD_LOGIC_VECTOR ( 23 downto 0 )
   );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of HDMI_bd_position_counter_0_0_position_counter : entity is "position_counter";
 end HDMI_bd_position_counter_0_0_position_counter;
 
 architecture STRUCTURE of HDMI_bd_position_counter_0_0_position_counter is

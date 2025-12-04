@@ -36,10 +36,10 @@ entity speed_detection is
         -- in
         clk         : in STD_LOGIC;
         rst         : in STD_LOGIC; 
-        grid_in    : in std_logic_vector(7 downto 0);
+        grid_in     : in std_logic_vector(7 downto 0);
         -- out
         speed_out   : out std_logic_vector(7 downto 0);  
-        out0, out1, out2, out3, out4, out5, out6, out7 : out std_logic
+        speed_valid : out std_logic
     );
 end speed_detection;
 
@@ -56,6 +56,7 @@ begin
     
         if rst = '1' then
             speed_out <= (others => '0');
+            speed_valid <= '0';
             
         elsif rising_edge(clk) then
             debug_speed <= (others => '0');
@@ -63,52 +64,55 @@ begin
                 -- Detect 1
                 if( digit_in = "0100100" ) then
                     speed_out <= x"0A";
+                    speed_valid <= '1';
                     debug_speed(0) <= '1';
                 -- Detect 2
                 elsif ( digit_in = "1011101" ) then
                     speed_out <= x"14";
+                    speed_valid <= '1';
                     debug_speed(1) <= '1';
                 -- Detect 3
                 elsif ( digit_in = "1101101" ) then
                     speed_out <= x"1E";
+                    speed_valid <= '1';
                     debug_speed(2) <= '1';
                 -- Detect 4
                 elsif ( digit_in = "1101110" ) then
                     speed_out <= x"28";
+                    speed_valid <= '1';
                     debug_speed(3) <= '1';
                 -- Detect 5
                 elsif ( digit_in = "1101011" ) then
                     speed_out <= x"32";
+                    speed_valid <= '1';
                     debug_speed(4) <= '1';
                 -- Detect 6
                 elsif ( digit_in = "1111011" ) then
                     speed_out <= x"3C";
+                    speed_valid <= '1';
                     debug_speed(5) <= '1';
                 -- Detect 7
                 elsif ( digit_in = "0100101" ) then
                     speed_out <= x"46";
+                    speed_valid <= '1';
                     debug_speed(6) <= '1';
                 -- Detect 8
                 elsif ( digit_in = "1111111" ) then
                     speed_out <= x"50";
+                    speed_valid <= '1';
                     debug_speed(7) <= '1';
                 -- Detect 9
                 elsif ( digit_in = "0101111" ) then
                     speed_out <= x"5A";
+                    speed_valid <= '1';
                 else
+                    speed_valid <= '0';
                 end if;
+            else
+                speed_valid <= '0';
             end if;
         end if;
         
     end process;
-
-out0 <= debug_speed(0);
-out1 <= debug_speed(1);
-out2 <= debug_speed(2);
-out3 <= debug_speed(3);
-out4 <= debug_speed(4);
-out5 <= debug_speed(5);
-out6 <= debug_speed(6);
-out7 <= debug_speed(7);
 
 end Behavioral;

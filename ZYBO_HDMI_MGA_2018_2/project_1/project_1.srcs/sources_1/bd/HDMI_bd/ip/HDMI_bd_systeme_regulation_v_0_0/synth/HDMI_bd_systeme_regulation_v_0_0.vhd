@@ -46,48 +46,56 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:speed_detection:1.0
+-- IP VLNV: xilinx.com:module_ref:systeme_regulation_vitesse:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY HDMI_bd_speed_detection_0_0 IS
+ENTITY HDMI_bd_systeme_regulation_v_0_0 IS
   PORT (
     clk : IN STD_LOGIC;
-    rst : IN STD_LOGIC;
-    grid_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-    speed_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-    speed_valid : OUT STD_LOGIC
+    reset : IN STD_LOGIC;
+    vitesse_panneau_camera : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    vitesse_panneau_valid : IN STD_LOGIC;
+    vitesse_vehicule : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
   );
-END HDMI_bd_speed_detection_0_0;
+END HDMI_bd_systeme_regulation_v_0_0;
 
-ARCHITECTURE HDMI_bd_speed_detection_0_0_arch OF HDMI_bd_speed_detection_0_0 IS
+ARCHITECTURE HDMI_bd_systeme_regulation_v_0_0_arch OF HDMI_bd_systeme_regulation_v_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_speed_detection_0_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT speed_detection IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_systeme_regulation_v_0_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT systeme_regulation_vitesse IS
     PORT (
       clk : IN STD_LOGIC;
-      rst : IN STD_LOGIC;
-      grid_in : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
-      speed_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-      speed_valid : OUT STD_LOGIC
+      reset : IN STD_LOGIC;
+      vitesse_panneau_camera : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      vitesse_panneau_valid : IN STD_LOGIC;
+      vitesse_vehicule : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
-  END COMPONENT speed_detection;
+  END COMPONENT systeme_regulation_vitesse;
+  ATTRIBUTE X_CORE_INFO : STRING;
+  ATTRIBUTE X_CORE_INFO OF HDMI_bd_systeme_regulation_v_0_0_arch: ARCHITECTURE IS "systeme_regulation_vitesse,Vivado 2023.1";
+  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
+  ATTRIBUTE CHECK_LICENSE_TYPE OF HDMI_bd_systeme_regulation_v_0_0_arch : ARCHITECTURE IS "HDMI_bd_systeme_regulation_v_0_0,systeme_regulation_vitesse,{}";
+  ATTRIBUTE CORE_GENERATION_INFO : STRING;
+  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_systeme_regulation_v_0_0_arch: ARCHITECTURE IS "HDMI_bd_systeme_regulation_v_0_0,systeme_regulation_vitesse,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=systeme_regulation_vitesse,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
+  ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
+  ATTRIBUTE IP_DEFINITION_SOURCE OF HDMI_bd_systeme_regulation_v_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
-  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN HDMI_bd_dvi2rgb_0_0_PixelClk, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET reset, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN HDMI_bd_dvi2rgb_0_0_PixelClk, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
-  ATTRIBUTE X_INTERFACE_PARAMETER OF rst: SIGNAL IS "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0";
-  ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF reset: SIGNAL IS "XIL_INTERFACENAME reset, POLARITY ACTIVE_LOW, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF reset: SIGNAL IS "xilinx.com:signal:reset:1.0 reset RST";
 BEGIN
-  U0 : speed_detection
+  U0 : systeme_regulation_vitesse
     PORT MAP (
       clk => clk,
-      rst => rst,
-      grid_in => grid_in,
-      speed_out => speed_out,
-      speed_valid => speed_valid
+      reset => reset,
+      vitesse_panneau_camera => vitesse_panneau_camera,
+      vitesse_panneau_valid => vitesse_panneau_valid,
+      vitesse_vehicule => vitesse_vehicule
     );
-END HDMI_bd_speed_detection_0_0_arch;
+END HDMI_bd_systeme_regulation_v_0_0_arch;

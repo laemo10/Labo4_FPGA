@@ -2,7 +2,7 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Thu Dec  4 10:46:15 2025
+--Date        : Thu Dec  4 16:44:25 2025
 --Host        : pcetu-129 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd_wrapper.bd
 --Design      : HDMI_bd_wrapper
@@ -27,15 +27,8 @@ entity HDMI_bd_wrapper is
     hdmi_out_data_n : out STD_LOGIC_VECTOR ( 2 downto 0 );
     hdmi_out_data_p : out STD_LOGIC_VECTOR ( 2 downto 0 );
     logic_reset : in STD_LOGIC;
-    out0_0 : out STD_LOGIC;
-    out1_0 : out STD_LOGIC;
-    out2_0 : out STD_LOGIC;
-    out3_0 : out STD_LOGIC;
-    out4_0 : out STD_LOGIC;
-    out5_0 : out STD_LOGIC;
-    out6_0 : out STD_LOGIC;
-    out7_0 : out STD_LOGIC;
-    reset : in STD_LOGIC
+    reset : in STD_LOGIC;
+    vitesse_vehicule_0 : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
 end HDMI_bd_wrapper;
 
@@ -60,14 +53,7 @@ architecture STRUCTURE of HDMI_bd_wrapper is
     reset : in STD_LOGIC;
     hdmi_in_hpd : out STD_LOGIC_VECTOR ( 0 to 0 );
     logic_reset : in STD_LOGIC;
-    out0_0 : out STD_LOGIC;
-    out1_0 : out STD_LOGIC;
-    out2_0 : out STD_LOGIC;
-    out3_0 : out STD_LOGIC;
-    out4_0 : out STD_LOGIC;
-    out5_0 : out STD_LOGIC;
-    out6_0 : out STD_LOGIC;
-    out7_0 : out STD_LOGIC
+    vitesse_vehicule_0 : out STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   end component HDMI_bd;
   component IOBUF is
@@ -104,15 +90,8 @@ HDMI_bd_i: component HDMI_bd
       hdmi_out_data_n(2 downto 0) => hdmi_out_data_n(2 downto 0),
       hdmi_out_data_p(2 downto 0) => hdmi_out_data_p(2 downto 0),
       logic_reset => logic_reset,
-      out0_0 => out0_0,
-      out1_0 => out1_0,
-      out2_0 => out2_0,
-      out3_0 => out3_0,
-      out4_0 => out4_0,
-      out5_0 => out5_0,
-      out6_0 => out6_0,
-      out7_0 => out7_0,
-      reset => reset
+      reset => reset,
+      vitesse_vehicule_0(7 downto 0) => vitesse_vehicule_0(7 downto 0)
     );
 hdmi_in_ddc_scl_iobuf: component IOBUF
      port map (
