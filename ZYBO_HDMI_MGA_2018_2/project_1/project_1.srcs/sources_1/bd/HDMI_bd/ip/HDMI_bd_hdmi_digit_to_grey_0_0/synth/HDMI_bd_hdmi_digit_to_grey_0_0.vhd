@@ -57,12 +57,17 @@ ENTITY HDMI_bd_hdmi_digit_to_grey_0_0 IS
   PORT (
     clk : IN STD_LOGIC;
     rst : IN STD_LOGIC;
+    h_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    v_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     vde_in : IN STD_LOGIC;
     hsync_in : IN STD_LOGIC;
     vsync_in : IN STD_LOGIC;
     rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-    matrix_flat_out : OUT STD_LOGIC_VECTOR(255 DOWNTO 0);
-    data_ready : OUT STD_LOGIC
+    valid_pixel : OUT STD_LOGIC;
+    current_row : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+    current_column : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+    pixel_value : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+    end_of_frame : OUT STD_LOGIC
   );
 END HDMI_bd_hdmi_digit_to_grey_0_0;
 
@@ -70,23 +75,20 @@ ARCHITECTURE HDMI_bd_hdmi_digit_to_grey_0_0_arch OF HDMI_bd_hdmi_digit_to_grey_0
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_hdmi_digit_to_grey_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT hdmi_digit_to_grey IS
-    GENERIC (
-      H_ACTIVE : INTEGER;
-      V_ACTIVE : INTEGER;
-      RECT_WIDTH : INTEGER;
-      RECT_HEIGHT : INTEGER;
-      EDGE_WIDTH : INTEGER;
-      ENABLE_DEBUG : BOOLEAN
-    );
     PORT (
       clk : IN STD_LOGIC;
       rst : IN STD_LOGIC;
+      h_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      v_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
       vde_in : IN STD_LOGIC;
       hsync_in : IN STD_LOGIC;
       vsync_in : IN STD_LOGIC;
       rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
-      matrix_flat_out : OUT STD_LOGIC_VECTOR(255 DOWNTO 0);
-      data_ready : OUT STD_LOGIC
+      valid_pixel : OUT STD_LOGIC;
+      current_row : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+      current_column : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+      pixel_value : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+      end_of_frame : OUT STD_LOGIC
     );
   END COMPONENT hdmi_digit_to_grey;
   ATTRIBUTE X_CORE_INFO : STRING;
@@ -94,7 +96,7 @@ ARCHITECTURE HDMI_bd_hdmi_digit_to_grey_0_0_arch OF HDMI_bd_hdmi_digit_to_grey_0
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF HDMI_bd_hdmi_digit_to_grey_0_0_arch : ARCHITECTURE IS "HDMI_bd_hdmi_digit_to_grey_0_0,hdmi_digit_to_grey,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_hdmi_digit_to_grey_0_0_arch: ARCHITECTURE IS "HDMI_bd_hdmi_digit_to_grey_0_0,hdmi_digit_to_grey,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=hdmi_digit_to_grey,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,H_ACTIVE=1600,V_ACTIVE=900,RECT_WIDTH=560,RECT_HEIGHT=720,EDGE_WIDTH=4,ENABLE_DEBUG=true}";
+  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_hdmi_digit_to_grey_0_0_arch: ARCHITECTURE IS "HDMI_bd_hdmi_digit_to_grey_0_0,hdmi_digit_to_grey,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=hdmi_digit_to_grey,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
   ATTRIBUTE IP_DEFINITION_SOURCE OF HDMI_bd_hdmi_digit_to_grey_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -105,22 +107,19 @@ ARCHITECTURE HDMI_bd_hdmi_digit_to_grey_0_0_arch OF HDMI_bd_hdmi_digit_to_grey_0
   ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
 BEGIN
   U0 : hdmi_digit_to_grey
-    GENERIC MAP (
-      H_ACTIVE => 1600,
-      V_ACTIVE => 900,
-      RECT_WIDTH => 560,
-      RECT_HEIGHT => 720,
-      EDGE_WIDTH => 4,
-      ENABLE_DEBUG => true
-    )
     PORT MAP (
       clk => clk,
       rst => rst,
+      h_count => h_count,
+      v_count => v_count,
       vde_in => vde_in,
       hsync_in => hsync_in,
       vsync_in => vsync_in,
       rgb_in => rgb_in,
-      matrix_flat_out => matrix_flat_out,
-      data_ready => data_ready
+      valid_pixel => valid_pixel,
+      current_row => current_row,
+      current_column => current_column,
+      pixel_value => pixel_value,
+      end_of_frame => end_of_frame
     );
 END HDMI_bd_hdmi_digit_to_grey_0_0_arch;

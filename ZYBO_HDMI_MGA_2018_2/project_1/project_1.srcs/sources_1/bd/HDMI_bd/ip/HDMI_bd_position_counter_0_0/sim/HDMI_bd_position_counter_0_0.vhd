@@ -46,59 +46,77 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:debug_led_parser:1.0
+-- IP VLNV: xilinx.com:module_ref:position_counter:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY HDMI_bd_debug_led_parser_0_0 IS
+ENTITY HDMI_bd_position_counter_0_0 IS
   PORT (
-    grid_in : IN STD_LOGIC_VECTOR(255 DOWNTO 0);
-    out0 : OUT STD_LOGIC;
-    out1 : OUT STD_LOGIC;
-    out2 : OUT STD_LOGIC;
-    out3 : OUT STD_LOGIC;
-    out4 : OUT STD_LOGIC;
-    out5 : OUT STD_LOGIC;
-    out6 : OUT STD_LOGIC
+    clk : IN STD_LOGIC;
+    rst : IN STD_LOGIC;
+    vde_in : IN STD_LOGIC;
+    hsync_in : IN STD_LOGIC;
+    vsync_in : IN STD_LOGIC;
+    rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+    vde_out : OUT STD_LOGIC;
+    hsync_out : OUT STD_LOGIC;
+    vsync_out : OUT STD_LOGIC;
+    h_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    v_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    rgb_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
   );
-END HDMI_bd_debug_led_parser_0_0;
+END HDMI_bd_position_counter_0_0;
 
-ARCHITECTURE HDMI_bd_debug_led_parser_0_0_arch OF HDMI_bd_debug_led_parser_0_0 IS
+ARCHITECTURE HDMI_bd_position_counter_0_0_arch OF HDMI_bd_position_counter_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_debug_led_parser_0_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT debug_led_parser IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_position_counter_0_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT position_counter IS
+    GENERIC (
+      H_ACTIVE : INTEGER;
+      V_ACTIVE : INTEGER
+    );
     PORT (
-      grid_in : IN STD_LOGIC_VECTOR(255 DOWNTO 0);
-      out0 : OUT STD_LOGIC;
-      out1 : OUT STD_LOGIC;
-      out2 : OUT STD_LOGIC;
-      out3 : OUT STD_LOGIC;
-      out4 : OUT STD_LOGIC;
-      out5 : OUT STD_LOGIC;
-      out6 : OUT STD_LOGIC
+      clk : IN STD_LOGIC;
+      rst : IN STD_LOGIC;
+      vde_in : IN STD_LOGIC;
+      hsync_in : IN STD_LOGIC;
+      vsync_in : IN STD_LOGIC;
+      rgb_in : IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+      vde_out : OUT STD_LOGIC;
+      hsync_out : OUT STD_LOGIC;
+      vsync_out : OUT STD_LOGIC;
+      h_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+      v_count : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+      rgb_out : OUT STD_LOGIC_VECTOR(23 DOWNTO 0)
     );
-  END COMPONENT debug_led_parser;
-  ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF HDMI_bd_debug_led_parser_0_0_arch: ARCHITECTURE IS "debug_led_parser,Vivado 2023.1";
-  ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF HDMI_bd_debug_led_parser_0_0_arch : ARCHITECTURE IS "HDMI_bd_debug_led_parser_0_0,debug_led_parser,{}";
-  ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_debug_led_parser_0_0_arch: ARCHITECTURE IS "HDMI_bd_debug_led_parser_0_0,debug_led_parser,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=debug_led_parser,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
-  ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
-  ATTRIBUTE IP_DEFINITION_SOURCE OF HDMI_bd_debug_led_parser_0_0_arch: ARCHITECTURE IS "module_ref";
+  END COMPONENT position_counter;
+  ATTRIBUTE X_INTERFACE_INFO : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET rst, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN HDMI_bd_dvi2rgb_0_0_PixelClk, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF rst: SIGNAL IS "XIL_INTERFACENAME rst, POLARITY ACTIVE_LOW, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
 BEGIN
-  U0 : debug_led_parser
+  U0 : position_counter
+    GENERIC MAP (
+      H_ACTIVE => 1600,
+      V_ACTIVE => 900
+    )
     PORT MAP (
-      grid_in => grid_in,
-      out0 => out0,
-      out1 => out1,
-      out2 => out2,
-      out3 => out3,
-      out4 => out4,
-      out5 => out5,
-      out6 => out6
+      clk => clk,
+      rst => rst,
+      vde_in => vde_in,
+      hsync_in => hsync_in,
+      vsync_in => vsync_in,
+      rgb_in => rgb_in,
+      vde_out => vde_out,
+      hsync_out => hsync_out,
+      vsync_out => vsync_out,
+      h_count => h_count,
+      v_count => v_count,
+      rgb_out => rgb_out
     );
-END HDMI_bd_debug_led_parser_0_0_arch;
+END HDMI_bd_position_counter_0_0_arch;

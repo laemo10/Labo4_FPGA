@@ -46,51 +46,60 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:module_ref:debug_led_parser:1.0
+-- IP VLNV: xilinx.com:module_ref:grid_processor:1.0
 -- IP Revision: 1
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-ENTITY HDMI_bd_debug_led_parser_0_0 IS
+ENTITY HDMI_bd_grid_processor_0_0 IS
   PORT (
-    grid_in : IN STD_LOGIC_VECTOR(255 DOWNTO 0);
-    out0 : OUT STD_LOGIC;
-    out1 : OUT STD_LOGIC;
-    out2 : OUT STD_LOGIC;
-    out3 : OUT STD_LOGIC;
-    out4 : OUT STD_LOGIC;
-    out5 : OUT STD_LOGIC;
-    out6 : OUT STD_LOGIC
+    clk : IN STD_LOGIC;
+    reset : IN STD_LOGIC;
+    valid_pixel : IN STD_LOGIC;
+    pixel_row : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    pixel_col : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    pixel_val : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    frame_done : IN STD_LOGIC;
+    flattened_out : OUT STD_LOGIC_VECTOR(119 DOWNTO 0);
+    data_ready : OUT STD_LOGIC
   );
-END HDMI_bd_debug_led_parser_0_0;
+END HDMI_bd_grid_processor_0_0;
 
-ARCHITECTURE HDMI_bd_debug_led_parser_0_0_arch OF HDMI_bd_debug_led_parser_0_0 IS
+ARCHITECTURE HDMI_bd_grid_processor_0_0_arch OF HDMI_bd_grid_processor_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
-  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_debug_led_parser_0_0_arch: ARCHITECTURE IS "yes";
-  COMPONENT debug_led_parser IS
+  ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_grid_processor_0_0_arch: ARCHITECTURE IS "yes";
+  COMPONENT grid_processor IS
     PORT (
-      grid_in : IN STD_LOGIC_VECTOR(255 DOWNTO 0);
-      out0 : OUT STD_LOGIC;
-      out1 : OUT STD_LOGIC;
-      out2 : OUT STD_LOGIC;
-      out3 : OUT STD_LOGIC;
-      out4 : OUT STD_LOGIC;
-      out5 : OUT STD_LOGIC;
-      out6 : OUT STD_LOGIC
+      clk : IN STD_LOGIC;
+      reset : IN STD_LOGIC;
+      valid_pixel : IN STD_LOGIC;
+      pixel_row : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      pixel_col : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      pixel_val : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      frame_done : IN STD_LOGIC;
+      flattened_out : OUT STD_LOGIC_VECTOR(119 DOWNTO 0);
+      data_ready : OUT STD_LOGIC
     );
-  END COMPONENT debug_led_parser;
+  END COMPONENT grid_processor;
+  ATTRIBUTE X_INTERFACE_INFO : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
+  ATTRIBUTE X_INTERFACE_PARAMETER OF clk: SIGNAL IS "XIL_INTERFACENAME clk, ASSOCIATED_RESET reset, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, PHASE 0.0, CLK_DOMAIN HDMI_bd_dvi2rgb_0_0_PixelClk, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF clk: SIGNAL IS "xilinx.com:signal:clock:1.0 clk CLK";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF reset: SIGNAL IS "XIL_INTERFACENAME reset, POLARITY ACTIVE_LOW, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_INFO OF reset: SIGNAL IS "xilinx.com:signal:reset:1.0 reset RST";
 BEGIN
-  U0 : debug_led_parser
+  U0 : grid_processor
     PORT MAP (
-      grid_in => grid_in,
-      out0 => out0,
-      out1 => out1,
-      out2 => out2,
-      out3 => out3,
-      out4 => out4,
-      out5 => out5,
-      out6 => out6
+      clk => clk,
+      reset => reset,
+      valid_pixel => valid_pixel,
+      pixel_row => pixel_row,
+      pixel_col => pixel_col,
+      pixel_val => pixel_val,
+      frame_done => frame_done,
+      flattened_out => flattened_out,
+      data_ready => data_ready
     );
-END HDMI_bd_debug_led_parser_0_0_arch;
+END HDMI_bd_grid_processor_0_0_arch;

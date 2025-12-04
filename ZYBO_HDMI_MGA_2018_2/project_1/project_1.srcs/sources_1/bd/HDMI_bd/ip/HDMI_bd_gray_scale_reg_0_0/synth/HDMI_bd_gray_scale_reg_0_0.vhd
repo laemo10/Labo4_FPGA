@@ -58,8 +58,16 @@ ENTITY HDMI_bd_gray_scale_reg_0_0 IS
     rst : IN STD_LOGIC;
     clk : IN STD_LOGIC;
     rdy : IN STD_LOGIC;
-    grid_in : IN STD_LOGIC_VECTOR(255 DOWNTO 0);
-    grid_out : OUT STD_LOGIC_VECTOR(255 DOWNTO 0)
+    flaten_gray_in : IN STD_LOGIC_VECTOR(119 DOWNTO 0);
+    flaten_gray_out : OUT STD_LOGIC_VECTOR(119 DOWNTO 0);
+    out0 : OUT STD_LOGIC;
+    out1 : OUT STD_LOGIC;
+    out2 : OUT STD_LOGIC;
+    out3 : OUT STD_LOGIC;
+    out4 : OUT STD_LOGIC;
+    out5 : OUT STD_LOGIC;
+    out6 : OUT STD_LOGIC;
+    out7 : OUT STD_LOGIC
   );
 END HDMI_bd_gray_scale_reg_0_0;
 
@@ -71,8 +79,16 @@ ARCHITECTURE HDMI_bd_gray_scale_reg_0_0_arch OF HDMI_bd_gray_scale_reg_0_0 IS
       rst : IN STD_LOGIC;
       clk : IN STD_LOGIC;
       rdy : IN STD_LOGIC;
-      grid_in : IN STD_LOGIC_VECTOR(255 DOWNTO 0);
-      grid_out : OUT STD_LOGIC_VECTOR(255 DOWNTO 0)
+      flaten_gray_in : IN STD_LOGIC_VECTOR(119 DOWNTO 0);
+      flaten_gray_out : OUT STD_LOGIC_VECTOR(119 DOWNTO 0);
+      out0 : OUT STD_LOGIC;
+      out1 : OUT STD_LOGIC;
+      out2 : OUT STD_LOGIC;
+      out3 : OUT STD_LOGIC;
+      out4 : OUT STD_LOGIC;
+      out5 : OUT STD_LOGIC;
+      out6 : OUT STD_LOGIC;
+      out7 : OUT STD_LOGIC
     );
   END COMPONENT gray_scale_reg;
   ATTRIBUTE X_CORE_INFO : STRING;
@@ -95,7 +111,15 @@ BEGIN
       rst => rst,
       clk => clk,
       rdy => rdy,
-      grid_in => grid_in,
-      grid_out => grid_out
+      flaten_gray_in => flaten_gray_in,
+      flaten_gray_out => flaten_gray_out,
+      out0 => out0,
+      out1 => out1,
+      out2 => out2,
+      out3 => out3,
+      out4 => out4,
+      out5 => out5,
+      out6 => out6,
+      out7 => out7
     );
 END HDMI_bd_gray_scale_reg_0_0_arch;
