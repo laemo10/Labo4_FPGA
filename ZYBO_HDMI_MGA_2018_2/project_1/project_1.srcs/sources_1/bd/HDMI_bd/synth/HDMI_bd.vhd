@@ -2,8 +2,8 @@
 --Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
---Date        : Fri Nov 28 00:50:44 2025
---Host        : pcetu-139 running 64-bit major release  (build 9200)
+--Date        : Wed Dec  3 21:51:34 2025
+--Host        : pcetu-199 running 64-bit major release  (build 9200)
 --Command     : generate_target HDMI_bd.bd
 --Design      : HDMI_bd
 --Purpose     : IP block netlist
@@ -111,7 +111,7 @@ architecture STRUCTURE of HDMI_bd is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component HDMI_bd_proc_sys_reset_0_0;
-  component HDMI_bd_hdmi_rectangle_overl_0_0 is
+  component HDMI_bd_position_counter_0_0 is
   port (
     clk : in STD_LOGIC;
     rst : in STD_LOGIC;
@@ -122,12 +122,30 @@ architecture STRUCTURE of HDMI_bd is
     vde_out : out STD_LOGIC;
     hsync_out : out STD_LOGIC;
     vsync_out : out STD_LOGIC;
+    h_count : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    v_count : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    rgb_out : out STD_LOGIC_VECTOR ( 23 downto 0 )
+  );
+  end component HDMI_bd_position_counter_0_0;
+  component HDMI_bd_hdmi_rectangle_overl_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    rst : in STD_LOGIC;
+    h_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    v_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    vde_in : in STD_LOGIC;
+    hsync_in : in STD_LOGIC;
+    vsync_in : in STD_LOGIC;
+    rgb_in : in STD_LOGIC_VECTOR ( 23 downto 0 );
+    vde_out : out STD_LOGIC;
+    hsync_out : out STD_LOGIC;
+    vsync_out : out STD_LOGIC;
     rgb_out : out STD_LOGIC_VECTOR ( 23 downto 0 )
   );
   end component HDMI_bd_hdmi_rectangle_overl_0_0;
-  component HDMI_bd_debug_led_parser_0_0 is
+  component HDMI_bd_speed_detection_0_0 is
   port (
-    grid_in : in STD_LOGIC_VECTOR ( 255 downto 0 );
+    digit_in : in STD_LOGIC_VECTOR ( 6 downto 0 );
     out0 : out STD_LOGIC;
     out1 : out STD_LOGIC;
     out2 : out STD_LOGIC;
@@ -136,37 +154,22 @@ architecture STRUCTURE of HDMI_bd is
     out5 : out STD_LOGIC;
     out6 : out STD_LOGIC
   );
-  end component HDMI_bd_debug_led_parser_0_0;
-  component HDMI_bd_gray_scale_reg_0_0 is
-  port (
-    rst : in STD_LOGIC;
-    clk : in STD_LOGIC;
-    rdy : in STD_LOGIC;
-    grid_in : in STD_LOGIC_VECTOR ( 255 downto 0 );
-    grid_out : out STD_LOGIC_VECTOR ( 255 downto 0 )
-  );
-  end component HDMI_bd_gray_scale_reg_0_0;
-  component HDMI_bd_hdmi_digit_to_grey_0_0 is
+  end component HDMI_bd_speed_detection_0_0;
+  component HDMI_bd_digit_detection_0_0 is
   port (
     clk : in STD_LOGIC;
     rst : in STD_LOGIC;
-    vde_in : in STD_LOGIC;
-    hsync_in : in STD_LOGIC;
-    vsync_in : in STD_LOGIC;
+    h_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    v_count : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    pixel_valid : in STD_LOGIC;
+    new_frame : in STD_LOGIC;
     rgb_in : in STD_LOGIC_VECTOR ( 23 downto 0 );
-    matrix_flat_out : out STD_LOGIC_VECTOR ( 255 downto 0 );
-    data_ready : out STD_LOGIC
+    seven_seg_out : out STD_LOGIC_VECTOR ( 6 downto 0 )
   );
-  end component HDMI_bd_hdmi_digit_to_grey_0_0;
+  end component HDMI_bd_digit_detection_0_0;
   signal CLK_1 : STD_LOGIC;
   signal clk_wiz_0_clk_out1 : STD_LOGIC;
-  signal debug_led_parser_0_out0 : STD_LOGIC;
-  signal debug_led_parser_0_out1 : STD_LOGIC;
-  signal debug_led_parser_0_out2 : STD_LOGIC;
-  signal debug_led_parser_0_out3 : STD_LOGIC;
-  signal debug_led_parser_0_out4 : STD_LOGIC;
-  signal debug_led_parser_0_out5 : STD_LOGIC;
-  signal debug_led_parser_0_out6 : STD_LOGIC;
+  signal digit_detection_0_seven_seg_out : STD_LOGIC_VECTOR ( 6 downto 0 );
   signal dvi2rgb_0_DDC_SCL_I : STD_LOGIC;
   signal dvi2rgb_0_DDC_SCL_O : STD_LOGIC;
   signal dvi2rgb_0_DDC_SCL_T : STD_LOGIC;
@@ -178,9 +181,6 @@ architecture STRUCTURE of HDMI_bd is
   signal dvi2rgb_0_vid_pHSync : STD_LOGIC;
   signal dvi2rgb_0_vid_pVDE : STD_LOGIC;
   signal dvi2rgb_0_vid_pVSync : STD_LOGIC;
-  signal gray_scale_reg_0_grid_out : STD_LOGIC_VECTOR ( 255 downto 0 );
-  signal hdmi_digit_to_grey_0_data_ready : STD_LOGIC;
-  signal hdmi_digit_to_grey_0_matrix_flat_out : STD_LOGIC_VECTOR ( 255 downto 0 );
   signal hdmi_in_1_CLK_N : STD_LOGIC;
   signal hdmi_in_1_CLK_P : STD_LOGIC;
   signal hdmi_in_1_DATA_N : STD_LOGIC_VECTOR ( 2 downto 0 );
@@ -190,12 +190,25 @@ architecture STRUCTURE of HDMI_bd is
   signal hdmi_rectangle_overl_0_vde_out : STD_LOGIC;
   signal hdmi_rectangle_overl_0_vsync_out : STD_LOGIC;
   signal logic_reset_1 : STD_LOGIC;
+  signal position_counter_0_h_count : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal position_counter_0_hsync_out : STD_LOGIC;
+  signal position_counter_0_rgb_out : STD_LOGIC_VECTOR ( 23 downto 0 );
+  signal position_counter_0_v_count : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal position_counter_0_vde_out : STD_LOGIC;
+  signal position_counter_0_vsync_out : STD_LOGIC;
   signal proc_sys_reset_0_peripheral_aresetn : STD_LOGIC_VECTOR ( 0 to 0 );
   signal reset_1 : STD_LOGIC;
   signal rgb2dvi_0_TMDS_CLK_N : STD_LOGIC;
   signal rgb2dvi_0_TMDS_CLK_P : STD_LOGIC;
   signal rgb2dvi_0_TMDS_DATA_N : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal rgb2dvi_0_TMDS_DATA_P : STD_LOGIC_VECTOR ( 2 downto 0 );
+  signal speed_detection_0_out0 : STD_LOGIC;
+  signal speed_detection_0_out1 : STD_LOGIC;
+  signal speed_detection_0_out2 : STD_LOGIC;
+  signal speed_detection_0_out3 : STD_LOGIC;
+  signal speed_detection_0_out4 : STD_LOGIC;
+  signal speed_detection_0_out5 : STD_LOGIC;
+  signal speed_detection_0_out6 : STD_LOGIC;
   signal xlconstant_0_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_clk_wiz_0_locked_UNCONNECTED : STD_LOGIC;
   signal NLW_dvi2rgb_0_aPixelClkLckd_UNCONNECTED : STD_LOGIC;
@@ -241,13 +254,13 @@ begin
   hdmi_out_data_n(2 downto 0) <= rgb2dvi_0_TMDS_DATA_N(2 downto 0);
   hdmi_out_data_p(2 downto 0) <= rgb2dvi_0_TMDS_DATA_P(2 downto 0);
   logic_reset_1 <= logic_reset;
-  out0_0 <= debug_led_parser_0_out0;
-  out1_0 <= debug_led_parser_0_out1;
-  out2_0 <= debug_led_parser_0_out2;
-  out3_0 <= debug_led_parser_0_out3;
-  out4_0 <= debug_led_parser_0_out4;
-  out5_0 <= debug_led_parser_0_out5;
-  out6_0 <= debug_led_parser_0_out6;
+  out0_0 <= speed_detection_0_out0;
+  out1_0 <= speed_detection_0_out1;
+  out2_0 <= speed_detection_0_out2;
+  out3_0 <= speed_detection_0_out3;
+  out4_0 <= speed_detection_0_out4;
+  out5_0 <= speed_detection_0_out5;
+  out6_0 <= speed_detection_0_out6;
   reset_1 <= reset;
 clk_wiz_0: component HDMI_bd_clk_wiz_0_0
      port map (
@@ -256,16 +269,16 @@ clk_wiz_0: component HDMI_bd_clk_wiz_0_0
       locked => NLW_clk_wiz_0_locked_UNCONNECTED,
       reset => reset_1
     );
-debug_led_parser_0: component HDMI_bd_debug_led_parser_0_0
+digit_detection_0: component HDMI_bd_digit_detection_0_0
      port map (
-      grid_in(255 downto 0) => gray_scale_reg_0_grid_out(255 downto 0),
-      out0 => debug_led_parser_0_out0,
-      out1 => debug_led_parser_0_out1,
-      out2 => debug_led_parser_0_out2,
-      out3 => debug_led_parser_0_out3,
-      out4 => debug_led_parser_0_out4,
-      out5 => debug_led_parser_0_out5,
-      out6 => debug_led_parser_0_out6
+      clk => dvi2rgb_0_PixelClk,
+      h_count(31 downto 0) => position_counter_0_h_count(31 downto 0),
+      new_frame => position_counter_0_vsync_out,
+      pixel_valid => position_counter_0_vde_out,
+      rgb_in(23 downto 0) => position_counter_0_rgb_out(23 downto 0),
+      rst => proc_sys_reset_0_peripheral_aresetn(0),
+      seven_seg_out(6 downto 0) => digit_detection_0_seven_seg_out(6 downto 0),
+      v_count(31 downto 0) => position_counter_0_v_count(31 downto 0)
     );
 dvi2rgb_0: component HDMI_bd_dvi2rgb_0_0
      port map (
@@ -289,37 +302,35 @@ dvi2rgb_0: component HDMI_bd_dvi2rgb_0_0
       vid_pVDE => dvi2rgb_0_vid_pVDE,
       vid_pVSync => dvi2rgb_0_vid_pVSync
     );
-gray_scale_reg_0: component HDMI_bd_gray_scale_reg_0_0
-     port map (
-      clk => dvi2rgb_0_PixelClk,
-      grid_in(255 downto 0) => hdmi_digit_to_grey_0_matrix_flat_out(255 downto 0),
-      grid_out(255 downto 0) => gray_scale_reg_0_grid_out(255 downto 0),
-      rdy => hdmi_digit_to_grey_0_data_ready,
-      rst => proc_sys_reset_0_peripheral_aresetn(0)
-    );
-hdmi_digit_to_grey_0: component HDMI_bd_hdmi_digit_to_grey_0_0
-     port map (
-      clk => dvi2rgb_0_PixelClk,
-      data_ready => hdmi_digit_to_grey_0_data_ready,
-      hsync_in => dvi2rgb_0_vid_pHSync,
-      matrix_flat_out(255 downto 0) => hdmi_digit_to_grey_0_matrix_flat_out(255 downto 0),
-      rgb_in(23 downto 0) => dvi2rgb_0_vid_pData(23 downto 0),
-      rst => proc_sys_reset_0_peripheral_aresetn(0),
-      vde_in => dvi2rgb_0_vid_pVDE,
-      vsync_in => dvi2rgb_0_vid_pVSync
-    );
 hdmi_rectangle_overl_0: component HDMI_bd_hdmi_rectangle_overl_0_0
      port map (
       clk => dvi2rgb_0_PixelClk,
-      hsync_in => dvi2rgb_0_vid_pHSync,
+      h_count(31 downto 0) => position_counter_0_h_count(31 downto 0),
+      hsync_in => position_counter_0_hsync_out,
       hsync_out => hdmi_rectangle_overl_0_hsync_out,
-      rgb_in(23 downto 0) => dvi2rgb_0_vid_pData(23 downto 0),
+      rgb_in(23 downto 0) => position_counter_0_rgb_out(23 downto 0),
       rgb_out(23 downto 0) => hdmi_rectangle_overl_0_rgb_out(23 downto 0),
       rst => proc_sys_reset_0_peripheral_aresetn(0),
-      vde_in => dvi2rgb_0_vid_pVDE,
+      v_count(31 downto 0) => position_counter_0_v_count(31 downto 0),
+      vde_in => position_counter_0_vde_out,
       vde_out => hdmi_rectangle_overl_0_vde_out,
-      vsync_in => dvi2rgb_0_vid_pVSync,
+      vsync_in => position_counter_0_vsync_out,
       vsync_out => hdmi_rectangle_overl_0_vsync_out
+    );
+position_counter_0: component HDMI_bd_position_counter_0_0
+     port map (
+      clk => dvi2rgb_0_PixelClk,
+      h_count(31 downto 0) => position_counter_0_h_count(31 downto 0),
+      hsync_in => dvi2rgb_0_vid_pHSync,
+      hsync_out => position_counter_0_hsync_out,
+      rgb_in(23 downto 0) => dvi2rgb_0_vid_pData(23 downto 0),
+      rgb_out(23 downto 0) => position_counter_0_rgb_out(23 downto 0),
+      rst => proc_sys_reset_0_peripheral_aresetn(0),
+      v_count(31 downto 0) => position_counter_0_v_count(31 downto 0),
+      vde_in => dvi2rgb_0_vid_pVDE,
+      vde_out => position_counter_0_vde_out,
+      vsync_in => dvi2rgb_0_vid_pVSync,
+      vsync_out => position_counter_0_vsync_out
     );
 proc_sys_reset_0: component HDMI_bd_proc_sys_reset_0_0
      port map (
@@ -346,6 +357,17 @@ rgb2dvi_0: component HDMI_bd_rgb2dvi_0_0
       vid_pHSync => hdmi_rectangle_overl_0_hsync_out,
       vid_pVDE => hdmi_rectangle_overl_0_vde_out,
       vid_pVSync => hdmi_rectangle_overl_0_vsync_out
+    );
+speed_detection_0: component HDMI_bd_speed_detection_0_0
+     port map (
+      digit_in(6 downto 0) => digit_detection_0_seven_seg_out(6 downto 0),
+      out0 => speed_detection_0_out0,
+      out1 => speed_detection_0_out1,
+      out2 => speed_detection_0_out2,
+      out3 => speed_detection_0_out3,
+      out4 => speed_detection_0_out4,
+      out5 => speed_detection_0_out5,
+      out6 => speed_detection_0_out6
     );
 xlconstant_0: component HDMI_bd_xlconstant_0_0
      port map (

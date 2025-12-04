@@ -57,6 +57,8 @@ ENTITY HDMI_bd_hdmi_rectangle_overl_0_0 IS
   PORT (
     clk : IN STD_LOGIC;
     rst : IN STD_LOGIC;
+    h_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    v_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     vde_in : IN STD_LOGIC;
     hsync_in : IN STD_LOGIC;
     vsync_in : IN STD_LOGIC;
@@ -72,17 +74,11 @@ ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_ove
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT hdmi_rectangle_overlay IS
-    GENERIC (
-      H_ACTIVE : INTEGER;
-      V_ACTIVE : INTEGER;
-      RECT_WIDTH : INTEGER;
-      RECT_HEIGHT : INTEGER;
-      EDGE_WIDTH : INTEGER;
-      ENABLE_DEBUG : BOOLEAN
-    );
     PORT (
       clk : IN STD_LOGIC;
       rst : IN STD_LOGIC;
+      h_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      v_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
       vde_in : IN STD_LOGIC;
       hsync_in : IN STD_LOGIC;
       vsync_in : IN STD_LOGIC;
@@ -98,7 +94,7 @@ ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_ove
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF HDMI_bd_hdmi_rectangle_overl_0_0_arch : ARCHITECTURE IS "HDMI_bd_hdmi_rectangle_overl_0_0,hdmi_rectangle_overlay,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "HDMI_bd_hdmi_rectangle_overl_0_0,hdmi_rectangle_overlay,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=hdmi_rectangle_overlay,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,H_ACTIVE=1600,V_ACTIVE=900,RECT_WIDTH=560,RECT_HEIGHT=720,EDGE_WIDTH=4,ENABLE_DEBUG=true}";
+  ATTRIBUTE CORE_GENERATION_INFO OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "HDMI_bd_hdmi_rectangle_overl_0_0,hdmi_rectangle_overlay,{x_ipProduct=Vivado 2023.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=hdmi_rectangle_overlay,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
   ATTRIBUTE IP_DEFINITION_SOURCE OF HDMI_bd_hdmi_rectangle_overl_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -109,17 +105,11 @@ ARCHITECTURE HDMI_bd_hdmi_rectangle_overl_0_0_arch OF HDMI_bd_hdmi_rectangle_ove
   ATTRIBUTE X_INTERFACE_INFO OF rst: SIGNAL IS "xilinx.com:signal:reset:1.0 rst RST";
 BEGIN
   U0 : hdmi_rectangle_overlay
-    GENERIC MAP (
-      H_ACTIVE => 1600,
-      V_ACTIVE => 900,
-      RECT_WIDTH => 560,
-      RECT_HEIGHT => 720,
-      EDGE_WIDTH => 4,
-      ENABLE_DEBUG => true
-    )
     PORT MAP (
       clk => clk,
       rst => rst,
+      h_count => h_count,
+      v_count => v_count,
       vde_in => vde_in,
       hsync_in => hsync_in,
       vsync_in => vsync_in,

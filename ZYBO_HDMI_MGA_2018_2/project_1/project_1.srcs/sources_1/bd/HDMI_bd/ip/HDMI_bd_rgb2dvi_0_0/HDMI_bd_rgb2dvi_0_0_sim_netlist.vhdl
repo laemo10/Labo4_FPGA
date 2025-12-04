@@ -2,10 +2,10 @@
 -- Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
--- Date        : Thu Nov 20 08:41:06 2025
+-- Date        : Thu Nov 20 08:41:05 2025
 -- Host        : pcetu-139 running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/laemo10/Desktop/Labo4_FPGA/ZYBO_HDMI_MGA_2018_2/project_1/project_1.srcs/sources_1/bd/HDMI_bd/ip/HDMI_bd_rgb2dvi_0_0/HDMI_bd_rgb2dvi_0_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top HDMI_bd_rgb2dvi_0_0 -prefix
+--               HDMI_bd_rgb2dvi_0_0_ HDMI_bd_rgb2dvi_0_0_sim_netlist.vhdl
 -- Design      : HDMI_bd_rgb2dvi_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -23,8 +23,6 @@ entity HDMI_bd_rgb2dvi_0_0_OutputSERDES is
     PixelClk : in STD_LOGIC;
     aRst : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_rgb2dvi_0_0_OutputSERDES : entity is "OutputSERDES";
 end HDMI_bd_rgb2dvi_0_0_OutputSERDES;
 
 architecture STRUCTURE of HDMI_bd_rgb2dvi_0_0_OutputSERDES is
@@ -660,8 +658,6 @@ entity HDMI_bd_rgb2dvi_0_0_SyncAsync is
     PixelClk : in STD_LOGIC;
     AS : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_rgb2dvi_0_0_SyncAsync : entity is "SyncAsync";
 end HDMI_bd_rgb2dvi_0_0_SyncAsync;
 
 architecture STRUCTURE of HDMI_bd_rgb2dvi_0_0_SyncAsync is
@@ -811,8 +807,6 @@ entity HDMI_bd_rgb2dvi_0_0_TMDS_Encoder is
     vid_pVDE : in STD_LOGIC;
     vid_pData : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_rgb2dvi_0_0_TMDS_Encoder : entity is "TMDS_Encoder";
 end HDMI_bd_rgb2dvi_0_0_TMDS_Encoder;
 
 architecture STRUCTURE of HDMI_bd_rgb2dvi_0_0_TMDS_Encoder is
@@ -4593,8 +4587,6 @@ entity HDMI_bd_rgb2dvi_0_0_ResetBridge is
     in0 : in STD_LOGIC;
     PixelClk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_rgb2dvi_0_0_ResetBridge : entity is "ResetBridge";
 end HDMI_bd_rgb2dvi_0_0_ResetBridge;
 
 architecture STRUCTURE of HDMI_bd_rgb2dvi_0_0_ResetBridge is
@@ -4649,8 +4641,6 @@ entity HDMI_bd_rgb2dvi_0_0_ClockGen is
     aRst : in STD_LOGIC;
     PixelClk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_rgb2dvi_0_0_ClockGen : entity is "ClockGen";
 end HDMI_bd_rgb2dvi_0_0_ClockGen;
 
 architecture STRUCTURE of HDMI_bd_rgb2dvi_0_0_ClockGen is
@@ -4912,8 +4902,6 @@ entity HDMI_bd_rgb2dvi_0_0_rgb2dvi is
     PixelClk : in STD_LOGIC;
     SerialClk : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of HDMI_bd_rgb2dvi_0_0_rgb2dvi : entity is "rgb2dvi";
   attribute kClkPrimitive : string;
   attribute kClkPrimitive of HDMI_bd_rgb2dvi_0_0_rgb2dvi : entity is "MMCM";
   attribute kClkRange : integer;
